@@ -2,9 +2,6 @@
     "version": 1,
     "rules": [
         {
-            "domain_keyword": [
-                "openai"
-            ],
             "domain": [
                 "3dns-1.adobe.com",
                 "3dns-2.adobe.com",
