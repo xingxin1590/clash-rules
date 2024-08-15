@@ -1,7 +1,4 @@
 payload:
-  - 'prod-southeastasia.access-point.cloudmessaging.edge.microsoft.com'
-  - 'functional.events.data.microsoft.com'
-  - 'storeedgefd.dsx.mp.microsoft.com'
   - '265.com'
   - '2mdn-cn.net'
   - '2mdn.net'
@@ -88580,3 +88577,6 @@ payload:
   - '+.zzzyy.com'
   - '+.zzzzaaaa.com'
   - '+.zzzzzz.me'
+  - PROCESS-NAME,FileCoAuth.exe
+  - PROCESS-NAME,msedgewebview2.exe
+  - PROCESS-NAME,msedge.exe
