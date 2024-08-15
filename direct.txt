@@ -1,4 +1,7 @@
 payload:
+  - 'prod-southeastasia.access-point.cloudmessaging.edge.microsoft.com'
+  - 'functional.events.data.microsoft.com'
+  - 'storeedgefd.dsx.mp.microsoft.com'
   - '265.com'
   - '2mdn-cn.net'
   - '2mdn.net'
