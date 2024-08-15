@@ -88577,6 +88577,11 @@ payload:
   - '+.zzzyy.com'
   - '+.zzzzaaaa.com'
   - '+.zzzzzz.me'
+  - PROCESS-NAME,svchost
+  - PROCESS-NAME,svchost.exe
+  - PROCESS-NAME,FileCoAuth
   - PROCESS-NAME,FileCoAuth.exe
+  - PROCESS-NAME,msedgewebview2
   - PROCESS-NAME,msedgewebview2.exe
+  - PROCESS-NAME,msedge
   - PROCESS-NAME,msedge.exe
