@@ -1,7 +1,4 @@
 payload:
-  # 内容：Netflix
-  # 数量：41条
-  # USER-AGENT,Argo*
   - DOMAIN-KEYWORD,apiproxy-device-prod-nlb-
   - DOMAIN-KEYWORD,dualstack.apiproxy-
   - DOMAIN-KEYWORD,netflixdnstest
