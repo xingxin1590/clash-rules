@@ -1,4 +1,9 @@
 payload:
+  - PROCESS-NAME,org.torproject.torbrowser
+  - PROCESS-NAME,com.ss.android.ugc.aweme
+  - PROCESS-NAME,com.netflix.sv1
+  - PROCESS-NAME,com.dream.apkall
+  - PROCESS-NAME,com.apkpure.aegon
   - PROCESS-NAME,hysteria
   - PROCESS-NAME,hysteria.exe
   - PROCESS-NAME,leaf
