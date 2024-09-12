@@ -63,27 +63,7 @@ const dnsConfig = {
     "dl.google.com",
     "dl.l.google.com"
   ],
-  "fallback-filter": {
-        "geoip": true,
-        "ip-cidr": [
-            "240.0.0.0/4",
-            "127.0.0.1/8",
-            "0.0.0.0/32",
-        ],
-        "domain": [
-            "+.google.com",
-            "+.facebook.com",
-            "+.twitter.com",
-            "+.youtube.com",
-            "+.xn--ngstr-lra8j.com",
-            "+.google.cn",
-            "+.googleapis.cn",
-            "+.googleapis.com",
-            "+.gvt1.com"
-        ]
-    },
   "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8","223.6.6.6","114.114.114.114"],
-  "fallback": ["tls://8.8.4.4","tls://1.1.1.1"],
   "nameserver": [...domesticNameservers, ...foreignNameservers],
   "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
   "nameserver-policy": {
