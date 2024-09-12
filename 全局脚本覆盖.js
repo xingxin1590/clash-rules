@@ -25,14 +25,21 @@ const foreignNameservers = [
 const dnsConfig = {
   "enable": true,
   "listen": "0.0.0.0:1053",
+  "use-system-hosts": true,
+  "use-hosts": true,
   "ipv6": true,
+  "prefer-h3": true,
   "use-system-hosts": false,
   "cache-algorithm": "arc",
+  "respect-rules": true,
   "enhanced-mode": "fake-ip",
+  "fake-ip-filter-mode": "blacklist",
   "fake-ip-range": "198.18.0.1/16",
   "fake-ip-filter": [
     // 本地主机/设备
     "+.lan",
+    "+.private",
+    "+.cn",
     "+.local",
     // Windows网络出现小地球图标
     "+.msftconnecttest.com",
@@ -42,6 +49,7 @@ const dnsConfig = {
     "localhost.sec.qq.com",
     // 微信快速登录检测失败
     "localhost.work.weixin.qq.com",
+    "localhost.weixin.qq.com",
     // 主动嗅探 Google FCM 和 DL 服务器
     "alt1-mtalk.google.com",
     "alt2-mtalk.google.com",
@@ -55,7 +63,27 @@ const dnsConfig = {
     "dl.google.com",
     "dl.l.google.com"
   ],
-  "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8"],
+  "fallback-filter": {
+        "geoip": true,
+        "ip-cidr": [
+            "240.0.0.0/4",
+            "127.0.0.1/8",
+            "0.0.0.0/32",
+        ],
+        "domain": [
+            "+.google.com",
+            "+.facebook.com",
+            "+.twitter.com",
+            "+.youtube.com",
+            "+.xn--ngstr-lra8j.com",
+            "+.google.cn",
+            "+.googleapis.cn",
+            "+.googleapis.com",
+            "+.gvt1.com"
+        ]
+    },
+  "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8","223.6.6.6","114.114.114.114"],
+  "fallback": ["tls://8.8.4.4","tls://1.1.1.1"],
   "nameserver": [...domesticNameservers, ...foreignNameservers],
   "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
   "nameserver-policy": {
