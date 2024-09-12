@@ -180,7 +180,7 @@ const ruleProviders = {
   "openai": {
     ...ruleProviderCommon,
     "behavior": "classical",
-    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/openai.txt",
+    "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml",
     "path": "./ruleset/blackmatrix7/openai.yaml"
   },
   "tiktok": {
