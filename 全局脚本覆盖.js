@@ -260,8 +260,16 @@ function main(config) {
       "name": "节点选择",
       "type": "select",
       "hidden": false,
-      "proxies": ["延迟选优", "负载均衡(散列)", "负载均衡(轮询)","香港AUTO","日本AUTO","新加坡AUTO","美国AUTO"],
+      "proxies": ["延迟选优", "负载均衡(散列)", "负载均衡(轮询)","🌍地区选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "🌍地区选择",
+      "type": "select",
+      "hidden": false,
+      "proxies": ["🇭🇰香港AUTO","🇯🇵日本AUTO","🇸🇬新加坡AUTO","🇺🇸美国AUTO","🇹🇼台湾AUTO","👑专线AUTO","🇰🇷韩国AUTO"],
+      "icon": "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/categoryglobe.png"
     },
     {
       ...groupBaseOption,
@@ -342,8 +350,8 @@ function main(config) {
       "type": "select",
       "url": "https://api.netflix.com",
       "expected-status": "200",
-      "include-all": true,
-      "hidden": false,
+      "hidden": true,
+      "proxies": ["节点选择"],
       "icon": "https://www.clashverge.dev/assets/icons/netflix.svg"
     },
     {
@@ -363,50 +371,80 @@ function main(config) {
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg"
     },
     {
-      
+      name: "👑专线AUTO",
       "include-all": true,
       "tolerance": 100,
-      "hidden": false,
+      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)香港|Hong Kong|HK|🇭🇰",
-      name: "香港AUTO",
+      filter: "(?i)专线|IEPL",
       type: "url-test",
       interval: 300,
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
-      
+      name: "🇭🇰香港AUTO",
       "include-all": true,
       "tolerance": 100,
-      "hidden": false,
+      "hidden": true,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      filter: "(?i)香港|Hong Kong|HK|🇭🇰",
+      type: "url-test",
+      interval: 300,
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },
+    {
+      name: "🇸🇬新加坡AUTO",
+      "include-all": true,
+      "tolerance": 100,
+      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)新加坡|Singapore|🇸🇬",
-      name: "新加坡AUTO",
       type: "url-test",
       interval: 300,
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg"
     },
     {
-      
+      name: "🇯🇵日本AUTO",
       "include-all": true,
       "tolerance": 100,
-      "hidden": false,
+      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)日本|Japan|🇯🇵",
-      name: "日本AUTO",
       type: "url-test",
       interval: 300,
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/jp.svg"
     },
     {
-      name: "美国AUTO",
+      name: "🇺🇸美国AUTO",
       type: "url-test",
       interval: 300,
       "tolerance": 100,
       "include-all": true,
-      "hidden": false,
+      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)美国|USA|🇺🇸",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
+    },
+    {
+      name: "🇹🇼台湾AUTO",
+      type: "url-test",
+      interval: 300,
+      "tolerance": 100,
+      "include-all": true,
+      "hidden": true,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      filter: "(?i)台湾|TW|🇹🇼",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
+    },
+    {
+      name: "🇰🇷韩国AUTO",
+      type: "url-test",
+      interval: 300,
+      "tolerance": 100,
+      "include-all": true,
+      "hidden": true,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      filter: "(?i)韩国|🇰🇷|KR",
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
     },
     {
