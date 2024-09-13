@@ -29,12 +29,30 @@ const dnsConfig = {
   "use-hosts": true,
   "ipv6": true,
   "prefer-h3": true,
-  "use-system-hosts": false,
   "cache-algorithm": "arc",
   "respect-rules": true,
   "enhanced-mode": "fake-ip",
   "fake-ip-filter-mode": "blacklist",
   "fake-ip-range": "198.18.0.1/16",
+      "fallback-filter": {
+        "geoip": true,
+        "ip-cidr": [
+            "240.0.0.0/4",
+            "127.0.0.1/8",
+            "0.0.0.0/32",
+        ],
+        "domain": [
+            "+.google.com",
+            "+.facebook.com",
+            "+.twitter.com",
+            "+.youtube.com",
+            "+.xn--ngstr-lra8j.com",
+            "+.google.cn",
+            "+.googleapis.cn",
+            "+.googleapis.com",
+            "+.gvt1.com"
+        ]
+    },
   "fake-ip-filter": [
     // 本地主机/设备
     "+.lan",
@@ -64,6 +82,7 @@ const dnsConfig = {
     "dl.l.google.com"
   ],
   "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8","223.6.6.6","114.114.114.114"],
+  "fallback": ["tls://8.8.4.4","tls://1.1.1.1"],
   "nameserver": [...domesticNameservers, ...foreignNameservers],
   "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
   "nameserver-policy": {
@@ -211,7 +230,7 @@ const rules = [
   // 其他规则
   "GEOIP,LAN,全局直连,no-resolve",
   "GEOIP,CN,全局直连,no-resolve",
-  "MATCH,漏网之鱼"
+  "MATCH,Final"
 ];
 // 代理组通用配置
 const groupBaseOption = {
@@ -241,7 +260,7 @@ function main(config) {
       "name": "节点选择",
       "type": "select",
       "hidden": false,
-      "proxies": ["延迟选优", "负载均衡(散列)", "负载均衡(轮询)"],
+      "proxies": ["延迟选优", "负载均衡(散列)", "负载均衡(轮询)","香港AUTO","日本AUTO","新加坡AUTO","美国AUTO"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
     },
     {
@@ -298,8 +317,7 @@ function main(config) {
     {
       ...groupBaseOption,
       "name": "ChatGPT",
-      "type": "url-test",
-      "tolerance": 100,
+      "type": "select",
       "url": "https://chatgpt.com",
       "expected-status": "200",
       "include-all": true,
@@ -310,8 +328,7 @@ function main(config) {
     {
       ...groupBaseOption,
       "name": "TikTok",
-      "type": "url-test",
-      "tolerance": 100,
+      "type": "select",
       "url": "https://www.tiktok.com",
       "expected-status": "200",
       "include-all": true,
@@ -322,8 +339,7 @@ function main(config) {
     {
       ...groupBaseOption,
       "name": "Netflix",
-      "type": "url-test",
-      "tolerance": 100,
+      "type": "select",
       "url": "https://api.netflix.com",
       "expected-status": "200",
       "include-all": true,
@@ -347,6 +363,53 @@ function main(config) {
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg"
     },
     {
+      
+      "include-all": true,
+      "tolerance": 100,
+      "hidden": false,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      filter: "(?i)香港|Hong Kong|HK|🇭🇰",
+      name: "香港AUTO",
+      type: "url-test",
+      interval: 300,
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },
+    {
+      
+      "include-all": true,
+      "tolerance": 100,
+      "hidden": false,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      filter: "(?i)新加坡|Singapore|🇸🇬",
+      name: "新加坡AUTO",
+      type: "url-test",
+      interval: 300,
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg"
+    },
+    {
+      
+      "include-all": true,
+      "tolerance": 100,
+      "hidden": false,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      filter: "(?i)日本|Japan|🇯🇵",
+      name: "日本AUTO",
+      type: "url-test",
+      interval: 300,
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/jp.svg"
+    },
+    {
+      name: "美国AUTO",
+      type: "url-test",
+      interval: 300,
+      "tolerance": 100,
+      "include-all": true,
+      "hidden": false,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      filter: "(?i)美国|USA|🇺🇸",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
+    },
+    {
       ...groupBaseOption,
       "name": "广告过滤",
       "type": "select",
@@ -364,7 +427,7 @@ function main(config) {
     },
     {
       ...groupBaseOption,
-      "name": "漏网之鱼",
+      "name": "Final",
       "type": "select",
       "hidden": true,
       "proxies": ["节点选择"],
