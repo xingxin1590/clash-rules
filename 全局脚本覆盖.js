@@ -528,7 +528,7 @@ function main(config) {
       "tolerance": 100,
       "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)德国|🇩🇪|GR",
+      filter: "(?i)德国|🇩🇪|DE|Germany",
       type: "url-test",
       interval: 300,
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -618,7 +618,7 @@ function main(config) {
       "include-all": true,
       "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)韩国|🇰🇷|KR",
+      filter: "(?i)韩国|🇰🇷|KR|Korea",
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
     },
     {
