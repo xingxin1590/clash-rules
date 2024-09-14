@@ -27,6 +27,74 @@ const dnsConfig = {
   "listen": "0.0.0.0:1053",
   "use-system-hosts": true,
   "use-hosts": true,
+  "hosts": {
+    // Google Services
+    "www.google.com": "172.217.14.206",
+    "google.com": "172.217.14.206",
+    "mail.google.com": "172.217.14.206",
+    "drive.google.com": "172.217.14.206",
+    "www.youtube.com": "142.250.72.206",
+    "youtube.com": "142.250.72.206",
+    "accounts.google.com": "142.250.72.206",
+
+    // GitHub
+    "github.com": "140.82.114.4",
+    "assets-cdn.github.com": "185.199.108.154",
+    "raw.githubusercontent.com": "185.199.108.133",
+    "user-images.githubusercontent.com": "185.199.109.153",
+    "avatars.githubusercontent.com": "185.199.109.154",
+
+    // Facebook & Instagram
+    "www.facebook.com": "157.240.22.35",
+    "facebook.com": "157.240.22.35",
+    "m.facebook.com": "157.240.22.35",
+    "instagram.com": "157.240.22.174",
+    "www.instagram.com": "157.240.22.174",
+
+    // Twitter
+    "twitter.com": "104.244.42.129",
+    "mobile.twitter.com": "104.244.42.193",
+    "abs.twimg.com": "104.244.42.65",
+
+    // Microsoft & Windows Update
+    "www.microsoft.com": "13.107.42.14",
+    "microsoft.com": "13.107.42.14",
+    "www.bing.com": "204.79.197.200",
+    "update.microsoft.com": "13.107.4.50",
+
+    // Apple
+    "www.apple.com": "17.253.144.10",
+    "apple.com": "17.253.144.10",
+    "itunes.apple.com": "17.253.144.10",
+    "appstore.com": "17.253.144.10",
+
+    // Amazon
+    "www.amazon.com": "205.251.242.103",
+    "amazon.com": "205.251.242.103",
+    "images-na.ssl-images-amazon.com": "176.32.103.205",
+
+    // Netflix
+    "netflix.com": "52.94.241.16",
+    "www.netflix.com": "52.94.241.16",
+    "api-global.netflix.com": "13.224.30.68",
+    "assets.nflxext.com": "13.224.30.68",
+
+    // Wikipedia
+    "en.wikipedia.org": "208.80.154.224",
+    "wikipedia.org": "208.80.154.224",
+
+    // Slack
+    "slack.com": "54.192.28.82",
+    "app.slack.com": "54.192.28.82",
+
+    // Zoom
+    "zoom.us": "170.114.10.68",
+    "www.zoom.us": "170.114.10.68",
+
+    // Dropbox
+    "dropbox.com": "162.125.66.1",
+    "www.dropbox.com": "162.125.66.1"
+  },
   "ipv6": true,
   "prefer-h3": true,
   "cache-algorithm": "arc",
@@ -193,6 +261,12 @@ const ruleProviders = {
     "behavior": "classical",
     "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/Netflix.txt",
     "path": "./ruleset/blackmatrix7/Netflix.yaml"
+  },
+  "emby": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Emby/Emby.yaml",
+    "path": "./ruleset/blackmatrix7/Emby.yaml"
   }
 };
 // 规则
@@ -213,6 +287,7 @@ const rules = [
   "RULE-SET,openai,🤖ChatGPT",
   "RULE-SET,tiktok,🎵TikTok",
   "RULE-SET,netflix,🎥Netflix",
+  "RULE-SET,emby,🔊Emby",
   // Loyalsoldier 规则集
   "RULE-SET,applications,✔️全局直连",
   "RULE-SET,private,✔️全局直连",
@@ -260,7 +335,7 @@ function main(config) {
       "name": "🖥️节点选择",
       "type": "select",
       "hidden": false,
-      "proxies": ["延迟选优", "负载均衡(散列)", "负载均衡(轮询)","🌍地区选择"],
+      "proxies": ["🚄延迟选优", "⚖️负载均衡(散列)", "⚖️负载均衡(轮询)","🌍地区选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
     },
     {
@@ -268,12 +343,13 @@ function main(config) {
       "name": "🌍地区选择",
       "type": "select",
       "hidden": false,
-      "proxies": ["🇦🇺澳大利亚AUTO","🇨🇦加拿大AUTO","🇩🇪德国AUTO","🇬🇧英国AUTO","🇭🇰香港AUTO","🇯🇵日本AUTO","🇸🇬新加坡AUTO","🇺🇸美国AUTO","🇹🇼台湾AUTO","👑专线AUTO","🇰🇷韩国AUTO","🇮🇳印度AUTO"],
+      "proxies": ["🇧🇷巴西AUTO","🇨🇭瑞士AUTO","🇦🇺澳大利亚AUTO","🇨🇦加拿大AUTO","🇩🇪德国AUTO","🇬🇧英国AUTO","🇭🇰香港AUTO","🇯🇵日本AUTO",
+      "🇸🇬新加坡AUTO","🇺🇸美国AUTO","🇹🇼台湾AUTO","👑专线(IEPL)AUTO","🇰🇷韩国AUTO","🇮🇳印度AUTO","🇷🇺俄罗斯AUTO"],
       "icon": "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/categoryglobe.png"
     },
     {
       ...groupBaseOption,
-      "name": "延迟选优",
+      "name": "🚄延迟选优",
       "type": "url-test",
       "tolerance": 100,
       "hidden": false,
@@ -282,7 +358,7 @@ function main(config) {
     },
     {
       ...groupBaseOption,
-      "name": "负载均衡(散列)",
+      "name": "⚖️负载均衡(散列)",
       "type": "load-balance",
       "strategy": "consistent-hashing",
       "include-all": true,
@@ -291,7 +367,7 @@ function main(config) {
     },
     {
       ...groupBaseOption,
-      "name": "负载均衡(轮询)",
+      "name": "⚖️负载均衡(轮询)",
       "type": "load-balance",
       "strategy": "round-robin",
       "include-all": true,
@@ -356,6 +432,16 @@ function main(config) {
     },
     {
       ...groupBaseOption,
+      "name": "🔊Emby",
+      "type": "select",
+      "url": "https://emby.media/",
+      "expected-status": "200",
+      "hidden": true,
+      "proxies": ["🖥️节点选择"],
+      "icon": "https://www.clashverge.dev/assets/icons/netflix.svg"
+    },
+    {
+      ...groupBaseOption,
       "name": "微软服务",
       "type": "select",
       "hidden": true,
@@ -371,12 +457,45 @@ function main(config) {
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg"
     },
     {
-      name: "👑专线AUTO",
+      name: "👑专线(IEPL)AUTO",
       "include-all": true,
       "tolerance": 100,
       "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)专线|IEPL",
+      filter: "(?i)专线|IEPL|👑|专转",
+      type: "url-test",
+      interval: 300,
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },
+    {
+      name: "🇷🇺俄罗斯AUTO",
+      "include-all": true,
+      "tolerance": 100,
+      "hidden": true,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      filter: "(?i)俄罗斯|🇷🇺|RU",
+      type: "url-test",
+      interval: 300,
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },
+    {
+      name: "🇧🇷巴西AUTO",
+      "include-all": true,
+      "tolerance": 100,
+      "hidden": true,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      filter: "(?i)巴西|🇧🇷|BR",
+      type: "url-test",
+      interval: 300,
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },
+    {
+      name: "🇨🇭瑞士AUTO",
+      "include-all": true,
+      "tolerance": 100,
+      "hidden": true,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      filter: "(?i)瑞士|🇨🇭|CH",
       type: "url-test",
       interval: 300,
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
