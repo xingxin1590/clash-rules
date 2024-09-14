@@ -550,7 +550,7 @@ function main(config) {
       "tolerance": 100,
       "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)印度|🇮🇳",
+      filter: "(?i)印度|🇮🇳|IN",
       type: "url-test",
       interval: 300,
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -572,7 +572,7 @@ function main(config) {
       "tolerance": 100,
       "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)新加坡|Singapore|🇸🇬",
+      filter: "(?i)新加坡|Singapore|🇸🇬|SG",
       type: "url-test",
       interval: 300,
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg"
@@ -583,7 +583,7 @@ function main(config) {
       "tolerance": 100,
       "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)日本|Japan|🇯🇵",
+      filter: "(?i)日本|Japan|🇯🇵|JP",
       type: "url-test",
       interval: 300,
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/jp.svg"
