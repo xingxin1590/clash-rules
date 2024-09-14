@@ -180,14 +180,14 @@ const ruleProviders = {
   },
   "apple": {
     ...ruleProviderCommon,
-    "behavior": "domain",
-    "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt",
+    "behavior": "classical",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/apple.txt",
     "path": "./ruleset/loyalsoldier/apple.yaml"
   },
   "google": {
     ...ruleProviderCommon,
-    "behavior": "domain",
-    "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt",
+    "behavior": "classical",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/Google.txt",
     "path": "./ruleset/loyalsoldier/google.yaml"
   },
   "proxy": {
@@ -267,6 +267,18 @@ const ruleProviders = {
     "behavior": "classical",
     "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Emby/Emby.yaml",
     "path": "./ruleset/blackmatrix7/Emby.yaml"
+  },
+  "youtube": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/YouTuBe.txt",
+    "path": "./ruleset/blackmatrix7/YouTuBe.yaml"
+  },
+  "microsoft": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/Microsoft.txt",
+    "path": "./ruleset/blackmatrix7/Microsoft.yaml"
   }
 };
 // 规则
@@ -284,6 +296,7 @@ const rules = [
   "DOMAIN-SUFFIX,github.io,🖥️节点选择", // Github Pages
   "DOMAIN,v2rayse.com,🖥️节点选择", // V2rayse节点工具
   // blackmatrix7 规则集
+  "RULE-SET,youtube,▶️YouTuBe",
   "RULE-SET,openai,🤖ChatGPT",
   "RULE-SET,tiktok,🎵TikTok",
   "RULE-SET,netflix,🎥Netflix",
@@ -292,9 +305,10 @@ const rules = [
   "RULE-SET,applications,✔️全局直连",
   "RULE-SET,private,✔️全局直连",
   "RULE-SET,reject,❌广告过滤",
-  "RULE-SET,icloud,微软服务",
+  "RULE-SET,microsoft,☁️微软服务",
+  "RULE-SET,icloud,📁icloud云存储",
   "RULE-SET,apple,🍎苹果服务",
-  "RULE-SET,google,谷歌服务",
+  "RULE-SET,google,🔍谷歌服务",
   "RULE-SET,proxy,🖥️节点选择",
   "RULE-SET,gfw,🖥️节点选择",
   "RULE-SET,tld-not-cn,🖥️节点选择",
@@ -309,7 +323,7 @@ const rules = [
 ];
 // 代理组通用配置
 const groupBaseOption = {
-  "interval": 300,
+  "interval": 200,
   "timeout": 3000,
   "url": "https://www.google.com/generate_204",
   "lazy": false,
@@ -376,7 +390,7 @@ function main(config) {
     },
     {
       ...groupBaseOption,
-      "name": "谷歌服务",
+      "name": "🔍谷歌服务",
       "type": "select",
       "hidden": true,
       "proxies": ["🖥️节点选择"],
@@ -384,11 +398,11 @@ function main(config) {
     },
     {
       ...groupBaseOption,
-      "name": "国外媒体",
+      "name": "📁icloud云存储",
       "type": "select",
       "hidden": true,
       "proxies": ["🖥️节点选择"],
-      "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/youtube.svg"
+      "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
     },
     {
       ...groupBaseOption,
@@ -407,7 +421,7 @@ function main(config) {
       "expected-status": "200",
       "include-all": true,
       "hidden": false,
-      "exclude-filter": "HK|🇭🇰|官网|剩余|到期|🇨🇳|香港|HongKong",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong",
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg"
     },
     {
@@ -418,7 +432,7 @@ function main(config) {
       "url": "https://www.tiktok.com",
       "expected-status": "200",
       "include-all": true,
-      "exclude-filter": "HK|🇭🇰|官网|剩余|到期|🇨🇳|香港|HongKong",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong",
       "hidden": false,
       "icon": "https://www.clashverge.dev/assets/icons/tiktok.svg"
     },
@@ -444,7 +458,18 @@ function main(config) {
     },
     {
       ...groupBaseOption,
-      "name": "微软服务",
+      "name": "▶️YouTuBe",
+      "type": "url-test",
+      "tolerance": 100,
+      "url": "https://www.youtube.com",
+      "expected-status": "200",
+      "hidden": true,
+      "proxies": ["🖥️节点选择"],
+      "icon": "https://www.clashverge.dev/assets/icons/netflix.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "☁️微软服务",
       "type": "select",
       "hidden": true,
       "proxies": ["🖥️节点选择"],
