@@ -190,6 +190,12 @@ const ruleProviders = {
     "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/Google.txt",
     "path": "./ruleset/loyalsoldier/google.yaml"
   },
+  "github": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/GitHub.txt",
+    "path": "./ruleset/loyalsoldier/GitHub.yaml"
+  },
   "proxy": {
     ...ruleProviderCommon,
     "behavior": "domain",
@@ -290,10 +296,6 @@ const rules = [
   "PROCESS-NAME,com.cccbb.abc,🖥️节点选择",
   "PROCESS-NAME,com.apkpure.aegon,🖥️节点选择",
   // 自定义规则
-  "DOMAIN-SUFFIX,googleapis.cn,🖥️节点选择", // Google服务
-  "DOMAIN-SUFFIX,gstatic.com,🖥️节点选择", // Google静态资源
-  "DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🖥️节点选择", // Google Play下载服务
-  "DOMAIN-SUFFIX,github.io,🖥️节点选择", // Github Pages
   "DOMAIN,v2rayse.com,🖥️节点选择", // V2rayse节点工具
   // blackmatrix7 规则集
   "RULE-SET,youtube,▶️YouTuBe",
@@ -301,6 +303,7 @@ const rules = [
   "RULE-SET,tiktok,🎵TikTok",
   "RULE-SET,netflix,🎥Netflix",
   "RULE-SET,emby,🔊Emby",
+  "RULE-SET,github,📦GitHub",
   // Loyalsoldier 规则集
   "RULE-SET,applications,✔️全局直连",
   "RULE-SET,private,✔️全局直连",
@@ -349,7 +352,7 @@ function main(config) {
       "name": "🖥️节点选择",
       "type": "select",
       "hidden": false,
-      "proxies": ["🚄延迟选优", "⚖️负载均衡(散列)", "⚖️负载均衡(轮询)","🌍地区选择"],
+      "proxies": ["🚄延迟选优", "⚖️负载均衡(散列)", "⚖️负载均衡(轮询)","🌍地区选择","DIRECT"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
     },
     {
@@ -391,6 +394,14 @@ function main(config) {
     {
       ...groupBaseOption,
       "name": "🔍谷歌服务",
+      "type": "select",
+      "hidden": true,
+      "proxies": ["🖥️节点选择"],
+      "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "📦GitHub",
       "type": "select",
       "hidden": true,
       "proxies": ["🖥️节点选择"],
