@@ -401,7 +401,8 @@ function main(config) {
     {
       ...groupBaseOption,
       "name": "🤖ChatGPT",
-      "type": "select",
+      "type": "url-test",
+      "tolerance": 100,
       "url": "https://chatgpt.com",
       "expected-status": "200",
       "include-all": true,
@@ -412,7 +413,8 @@ function main(config) {
     {
       ...groupBaseOption,
       "name": "🎵TikTok",
-      "type": "select",
+      "type": "url-test",
+      "tolerance": 100,
       "url": "https://www.tiktok.com",
       "expected-status": "200",
       "include-all": true,
@@ -465,6 +467,7 @@ function main(config) {
       filter: "(?i)专线|IEPL|👑|专转",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
@@ -476,6 +479,7 @@ function main(config) {
       filter: "(?i)俄罗斯|🇷🇺|RU",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
@@ -487,6 +491,7 @@ function main(config) {
       filter: "(?i)巴西|🇧🇷|BR",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
@@ -498,6 +503,7 @@ function main(config) {
       filter: "(?i)瑞士|🇨🇭|CH",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
@@ -509,6 +515,7 @@ function main(config) {
       filter: "(?i)澳大利亚|🇦🇺|AU",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
@@ -520,6 +527,7 @@ function main(config) {
       filter: "(?i)加拿大|🇨🇦|CA",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
@@ -531,6 +539,7 @@ function main(config) {
       filter: "(?i)德国|🇩🇪|DE|Germany",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
@@ -542,6 +551,7 @@ function main(config) {
       filter: "(?i)英国|🇬🇧|UK",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
@@ -553,6 +563,7 @@ function main(config) {
       filter: "(?i)印度|🇮🇳|IN",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
@@ -564,6 +575,7 @@ function main(config) {
       filter: "(?i)香港|Hong Kong|HK|🇭🇰",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
     },
     {
@@ -575,6 +587,7 @@ function main(config) {
       filter: "(?i)新加坡|Singapore|🇸🇬|SG",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg"
     },
     {
@@ -586,6 +599,7 @@ function main(config) {
       filter: "(?i)日本|Japan|🇯🇵|JP",
       type: "url-test",
       interval: 300,
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/jp.svg"
     },
     {
@@ -597,6 +611,7 @@ function main(config) {
       "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)美国|USA|🇺🇸",
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
     },
     {
@@ -608,6 +623,7 @@ function main(config) {
       "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)台湾|TW|🇹🇼",
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
     },
     {
@@ -619,6 +635,7 @@ function main(config) {
       "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)韩国|🇰🇷|KR|Korea",
+      "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
     },
     {
