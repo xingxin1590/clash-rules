@@ -601,7 +601,7 @@ const rules = [
 ];
 // 代理组通用配置
 const groupBaseOption = {
-  "interval": 150,
+  "interval": 120,
   "timeout": 3000,
   "lazy": false,
   "max-failed-times": 3,
@@ -637,7 +637,7 @@ function main(config) {
       "type": "select",
       "hidden": false,
       "url": "https://www.google.com/generate_204",
-      "proxies": ["🚄延迟选优", "⚖️负载均衡(散列)", "⚖️负载均衡(轮询)","🌍地区选择","DIRECT"],
+      "proxies": ["🚄延迟选优", "⚖️负载均衡(散列)", "⚖️负载均衡(轮询)","🌍地区选择","🚑故障转移","DIRECT"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
     },
     {
@@ -679,6 +679,15 @@ function main(config) {
       "include-all": true,
       "hidden": true,
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/balance.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "🚑故障转移",
+      "type": "fallback",
+      "hidden": false,
+      "include-all" : true,
+      "url": "https://www.google.com/generate_204",
+      "icon": "https://www.clashverge.dev/assets/icons/ambulance.svg"
     },
     {
       ...groupBaseOption,
@@ -743,11 +752,13 @@ function main(config) {
     {
       ...groupBaseOption,
       "name": "🎥Netflix",
-      "type": "select",
+      "type": "url-test",
+      "tolerance": 50,
       "url": "https://www.netflix.com/title/81280792",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|官网",
       "expected-status": "200",
       "hidden": true,
-      "proxies": ["🖥️节点选择"],
+      "include-all" :true,
       "icon": "https://www.clashverge.dev/assets/icons/netflix.svg"
     },
     {
@@ -765,11 +776,12 @@ function main(config) {
       "name": "▶️YouTuBe",
       "type": "url-test",
       "tolerance": 50,
-      "url": "https://www.youtube.com",
+      "url": "https://www.youtube.com/watch?v=bclV6mAkeYw",
       "expected-status": "200",
-      "hidden": true,
-      "proxies": ["🖥️节点选择"],
-      "icon": "https://www.clashverge.dev/assets/icons/netflix.svg"
+      "hidden": false,
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|官网",
+      "include-all":true,
+      "icon": "https://www.clashverge.dev/assets/icons/youtube.svg"
     },
     {
       ...groupBaseOption,
@@ -795,7 +807,7 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)专线|IEPL|👑|专转",
       type: "url-test",
       "proxies": ["REJECT"],
@@ -807,8 +819,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)俄罗斯|🇷🇺|RU",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)俄罗斯|🇷🇺",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -819,8 +831,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)巴西|🇧🇷|BR",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)巴西|🇧🇷",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -831,8 +843,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)瑞士|🇨🇭|CH",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)瑞士|🇨🇭",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -843,8 +855,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)澳大利亚|🇦🇺|AU",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)澳大利亚|🇦🇺",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -855,8 +867,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)加拿大|🇨🇦|CA",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)加拿大|🇨🇦",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -867,8 +879,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)德国|🇩🇪|DE|Germany",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)德国|🇩🇪|Germany",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -879,8 +891,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)英国|🇬🇧|UK",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)英国|🇬🇧",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -891,8 +903,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)印度|🇮🇳|IN",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)印度|🇮🇳",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -903,8 +915,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)香港|Hong Kong|HK|🇭🇰",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)香港|Hong Kong|🇭🇰",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -915,8 +927,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)新加坡|Singapore|🇸🇬|SG",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)新加坡|Singapore|🇸🇬",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg"
@@ -927,8 +939,8 @@ function main(config) {
       "tolerance": 50,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)日本|Japan|🇯🇵|JP",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)日本|Japan|🇯🇵",
       type: "url-test",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/jp.svg"
@@ -940,8 +952,8 @@ function main(config) {
       "include-all": true,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)美国|USA|🇺🇸",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)美国|🇺🇸",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
     },
@@ -952,8 +964,8 @@ function main(config) {
       "include-all": true,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)台湾|TW|🇹🇼",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)台湾|🇹🇼",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
     },
@@ -964,8 +976,8 @@ function main(config) {
       "include-all": true,
       "hidden": true,
       "url": "https://www.google.com/generate_204",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
-      filter: "(?i)韩国|🇰🇷|KR|Korea",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+      filter: "(?i)韩国|🇰🇷|Korea",
       "proxies": ["REJECT"],
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg",
     },
