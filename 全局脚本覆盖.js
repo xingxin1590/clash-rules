@@ -590,8 +590,6 @@ const ruleProviders = {
 const rules = [
   //包名
   "PROCESS-NAME,org.torproject.torbrowser,🖥️节点选择",
-  "PROCESS-NAME,com.zhiliaoapp.musically,🎵TikTok",
-  "PROCESS-NAME,com.netflix.sv1,🎥Netflix",
   "PROCESS-NAME,com.cccbb.abc,🖥️节点选择",
   "PROCESS-NAME,com.apkpure.aegon,🖥️节点选择",
   // 自定义规则
