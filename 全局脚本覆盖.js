@@ -453,17 +453,35 @@ const ruleProviders = {
     "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt",
     "path": "./ruleset/loyalsoldier/icloud.yaml"
   },
-  "apple": {
+  "apple-classical": {
     ...ruleProviderCommon,
     "behavior": "classical",
-    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/apple.txt",
-    "path": "./ruleset/loyalsoldier/apple.yaml"
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/apple-classical.txt",
+    "path": "./ruleset/loyalsoldier/apple-classical.yaml"
   },
-  "google": {
+  "apple-domain": {
+    ...ruleProviderCommon,
+    "behavior": "domain",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/apple-domain.txt",
+    "path": "./ruleset/loyalsoldier/apple-domain.yaml"
+  },
+  "apple-direct": {
+    ...ruleProviderCommon,
+    "behavior": "domain",
+    "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt",
+    "path": "./ruleset/loyalsoldier/apple-direct.yaml"
+  },
+  "google-classical": {
     ...ruleProviderCommon,
     "behavior": "classical",
     "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/Google.txt",
-    "path": "./ruleset/loyalsoldier/google.yaml"
+    "path": "./ruleset/loyalsoldier/google-classical.yaml"
+  },
+  "google-domain": {
+    ...ruleProviderCommon,
+    "behavior": "domain",
+    "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt",
+    "path": "./ruleset/loyalsoldier/google-domain.yaml"
   },
   "github": {
     ...ruleProviderCommon,
@@ -560,6 +578,12 @@ const ruleProviders = {
     "behavior": "classical",
     "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/Microsoft.txt",
     "path": "./ruleset/blackmatrix7/Microsoft.yaml"
+  },
+  "twitch": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/twitch.txt",
+    "path": "./ruleset/blackmatrix7/Twitch.yaml"
   }
 };
 // 规则
@@ -579,14 +603,18 @@ const rules = [
   "RULE-SET,netflix,🎥Netflix",
   "RULE-SET,emby,🔊Emby",
   "RULE-SET,github,📦GitHub",
+  "RULE-SET,twitch,🎮Twitch",
   // Loyalsoldier 规则集
   "RULE-SET,applications,✔️全局直连",
   "RULE-SET,private,✔️全局直连",
   "RULE-SET,reject,❌广告过滤",
   "RULE-SET,microsoft,☁️微软服务",
-  "RULE-SET,icloud,📁icloud云存储",
-  "RULE-SET,apple,🍎苹果服务",
-  "RULE-SET,google,🔍谷歌服务",
+  "RULE-SET,icloud,✔️全局直连",
+  "RULE-SET,apple-classical,🍎苹果服务",
+  "RULE-SET,apple-domain,🍎苹果服务",
+  "RULE-SET,apple-direct,✔️全局直连",
+  "RULE-SET,google-classical,🔍谷歌服务",
+  "RULE-SET,google-domain,🔍谷歌服务",
   "RULE-SET,proxy,🖥️节点选择",
   "RULE-SET,gfw,🖥️节点选择",
   "RULE-SET,tld-not-cn,🖥️节点选择",
@@ -701,6 +729,15 @@ function main(config) {
     {
       ...groupBaseOption,
       "name": "📦GitHub",
+      "type": "select",
+      "hidden": true,
+      "url": "https://www.google.com/generate_204",
+      "proxies": ["🖥️节点选择"],
+      "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "🎮Twitch",
       "type": "select",
       "hidden": true,
       "url": "https://www.google.com/generate_204",
