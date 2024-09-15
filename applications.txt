@@ -1,4 +1,8 @@
 payload:
+  - PROCESS-NAME,com.sankuai.meituan
+  - PROCESS-NAME,com.tencent.mobileqq
+  - PROCESS-NAME,com.tencent.mm
+  - PROCESS-NAME,me.ele
   - DOMAIN,ad.10010.com
   - DOMAIN,ad.12306.cn
   - DOMAIN,ain.bgm.tv
