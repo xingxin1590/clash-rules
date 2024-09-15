@@ -430,7 +430,7 @@ const dnsConfig = {
   "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
   "nameserver-policy": {
     "geosite:private,cn,geolocation-cn": domesticNameservers,
-    "geosite:google,youtube,telegram,gfw,geolocation-!cn": foreignNameservers,
+    "geosite:google,youtube,telegram,gfw,Microsoft,OpenAI,TikTok,github,geolocation-!cn": foreignNameservers,
   }
 };
 // 规则集通用配置
