@@ -21,6 +21,101 @@ const foreignNameservers = [
   "8.8.4.4",
   "https://[2001:4860:4860::6464]/dns-query//h3=true"
 ];
+
+const profileConfig = {
+  "store-selected": true,
+  "store-fake-ip": true
+};
+
+const tunConfig = {
+  enable : false,
+  stack : "Mixed",
+  "dns-hijack" :[
+    "any:53",
+    "tcp://any:53"
+  ],
+  "auto-route" : true,
+  "auto-detect-interface" : true,
+  mtu : 9000,
+  "strict-route" : true,
+};
+
+//嗅探配置
+const snifferConfig = {
+  enable : true,
+  "force-dns-mapping" : true,
+  "parse-pure-ip" : true,
+  "override-destination" : true,
+  sniff : {
+    TLS : {
+      ports: [
+        "443",
+        "8443",
+        "5228",
+      ]
+    },
+    HTTP : {
+      ports : [
+        "80",
+        "8080-8880"
+      ],
+      "override-destination" : true,
+    },
+    QUIC : {
+      ports : [
+        "443",
+        "5228",
+        "8443",
+      ]
+    }
+  },
+  "force-domain" : [
+    "+.v2ex.com",
+    // Github CDN 加速
+    "+.ghproxy.com",
+    "+.jsdelivr.net",
+    // Google FCM 服务器
+    "geosite:googlefcm",
+    // Google DL 服务器
+    "dl.google.com",
+    "dl.l.google.com",
+    // 微信信息及 FCM 相关
+    "+.weixin.qq.com",
+    // 向日葵
+    "+.rc.sunlogin.net",
+    // 其他常用
+    "+.coolapk.com",
+    "+.douban.com",
+    "+.dianping.com",
+    "+.meituan.com",
+    "+.meituan.net",
+    "+.xiaohongshu.com",
+    "+.xhscdn.com",
+  ],
+  //对嗅探结果进行跳过
+  "skip-domain" : [
+    "Mijia Cloud",
+    "dlg.io.mi.com",
+    "+.apple.com",
+  ],
+};
+
+// 流量转发隧道，可以转发 tcp/udp 流量，也可经过代理转发
+/*const tunnelsConfig = {
+  //单行格式
+  "tcp/udp,127.0.0.1:6553,114.114.114.114:53,proxy":
+  "tcp,127.0.0.1:6666,rds.mysql.com:3306,vpn",
+  //多行格式
+  "network" : ["tcp", "udp"],
+     "address": "127.0.0.1:6553",
+     "target": "114.114.114.114:53",
+     "proxy": "proxy",
+  "network" : ["tcp"],
+     "address": "127.0.0.1:6666",
+     "target": "rds.mysql.com:3306",
+     "proxy": "vpn",
+};*/
+
 // DNS配置
 const dnsConfig = {
   "enable": true,
@@ -105,18 +200,42 @@ const dnsConfig = {
       "fallback-filter": {
         "geoip": true,
         "ip-cidr": [
-            "240.0.0.0/4",
             "127.0.0.1/8",
             "0.0.0.0/32",
+            "0.0.0.0/8",
+            "10.0.0.0/8",
+            "100.64.0.0/10",
+            "127.0.0.0/8",
+            "169.254.0.0/16",
+            "172.16.0.0/12",
+            "192.0.0.0/24",
+            "192.0.2.0/24",
+            "192.168.0.0/16",
+            "192.88.99.0/24",
+            "198.18.0.0/15",
+            "198.51.100.0/24",
+            "203.0.113.0/24",
+            "224.0.0.0/4",
+            "240.0.0.0/4",
+            "255.255.255.255/32",
         ],
         "domain": [
             "+.google.com",
             "+.facebook.com",
             "+.twitter.com",
+            "+.instagram.com",
+            "+.netfix.com",
+            "+.hbo.com",
+            "+.disneyplus.com",
+            "+.github.com",
+            "+.githubusercontent.com",
             "+.youtube.com",
             "+.xn--ngstr-lra8j.com",
             "+.google.cn",
+            "+.googlevideo.com",
             "+.googleapis.cn",
+            "+.x.com",
+            "+.tiktok.com",
             "+.googleapis.com",
             "+.gvt1.com"
         ]
@@ -127,6 +246,7 @@ const dnsConfig = {
     "+.private",
     "+.cn",
     "+.local",
+    "*.localdomain",
     // Windows网络出现小地球图标
     "+.msftconnecttest.com",
     "+.msftncsi.com",
@@ -147,9 +267,164 @@ const dnsConfig = {
     "alt8-mtalk.google.com",
     "mtalk.google.com",
     "dl.google.com",
-    "dl.l.google.com"
+    "dl.l.google.com",
+    "+.example",
+    "+.invalid",
+    "+.localhost",
+    "+.test",
+    "+.local",
+    "+.home.arpa",
+    // 放行NTP服务
+    "time.*.com",
+    "time.*.gov",
+    "time.*.edu.cn",
+    "time.*.apple.com",
+    "time-ios.apple.com",
+    "time1.*.com",
+    "time2.*.com",
+    "time3.*.com",
+    "time4.*.com",
+    "time5.*.com",
+    "time6.*.com",
+    "time7.*.com",
+    "ntp.*.com",
+    "ntp1.*.com",
+    "ntp2.*.com",
+    "ntp3.*.com",
+    "ntp4.*.com",
+    "ntp5.*.com",
+    "ntp6.*.com",
+    "ntp7.*.com",
+    "*.time.edu.cn",
+    "*.ntp.org.cn",
+    "+.pool.ntp.org",
+    "time1.cloud.tencent.com",
+    // 放行网易云音乐
+    "music.163.com",
+    "*.music.163.com",
+    "*.126.net",
+    // 百度音乐
+    "musicapi.taihe.com",
+    "music.taihe.com",
+    // 酷狗音乐
+    "songsearch.kugou.com",
+    "trackercdn.kugou.com",
+    // 酷我音乐
+    "*.kuwo.cn",
+    // JOOX音乐
+    "api-jooxtt.sanook.com",
+    "api.joox.com",
+    "joox.com",
+    // QQ音乐
+    "y.qq.com",
+    "*.y.qq.com",
+    "streamoc.music.tc.qq.com",
+    "mobileoc.music.tc.qq.com",
+    "isure.stream.qqmusic.qq.com",
+    "dl.stream.qqmusic.qq.com",
+    "aqqmusic.tc.qq.com",
+    "amobile.music.tc.qq.com",
+    // 虾米音乐
+    "*.xiami.com",
+    // 咪咕音乐
+    "*.music.migu.cn",
+    "music.migu.cn",
+    // win10本地连接检测
+    "+.msftconnecttest.com",
+    "+.msftncsi.com",
+    // QQ登录
+    "localhost.ptlogin2.qq.com",
+    "localhost.sec.qq.com",
+    "+.qq.com",
+    "+.tencent.com",
+    // Game
+    // Steam
+    "+.steamcontent.com",
+    // Nintendo Switch
+    "+.srv.nintendo.net",
+    "*.n.n.srv.nintendo.net",
+    "+.cdn.nintendo.net",
+    // Sony PlayStation
+    "+.stun.playstation.net",
+    // Microsoft Xbox
+    "xbox.*.*.microsoft.com",
+    "*.*.xboxlive.com",
+    "xbox.*.microsoft.com",
+    "xnotify.xboxlive.com",
+    // Wotgame
+    "+.battlenet.com.cn",
+    "+.wotgame.cn",
+    "+.wggames.cn",
+    "+.wowsgame.cn",
+    "+.wargaming.net",
+    // Golang
+    "proxy.golang.org",
+    // STUN
+    "stun.*.*",
+    "stun.*.*.*",
+    "+.stun.*.*",
+    "+.stun.*.*.*",
+    "+.stun.*.*.*.*",
+    "+.stun.*.*.*.*.*",
+    // Linksys Router
+    "heartbeat.belkin.com",
+    "*.linksys.com",
+    "*.linksyssmartwifi.com",
+    // ASUS Router
+    "*.router.asus.com",
+    // Apple Software Update Service
+    "mesu.apple.com",
+    "swscan.apple.com",
+    "swquery.apple.com",
+    "swdownload.apple.com",
+    "swcdn.apple.com",
+    "swdist.apple.com",
+    // Google
+    "lens.l.google.com",
+    "stun.l.google.com",
+    "na.b.g-tun.com",
+    // Netflix
+    "+.nflxvideo.net",
+    // FinalFantasy XIV Worldwide Server & CN Server
+    "*.square-enix.com",
+    "*.finalfantasyxiv.com",
+    "*.ffxiv.com",
+    "*.ff14.sdo.com",
+    "ff.dorado.sdo.com",
+    // Bilibili
+    "*.mcdn.bilivideo.cn",
+    // Disney Plus
+    "+.media.dssott.com",
+    // shark007 Codecs
+    "shark007.net",
+    // Mijia
+    "Mijia Cloud",
+    // Xiaomi
+    "+.market.xiaomi.com",
+    // 招商银行
+    "+.cmbchina.com",
+    "+.cmbimg.com",
+    // AdGuard
+    "adguardteam.github.io",
+    "adrules.top",
+    "anti-ad.net",
+    "local.adguard.org",
+    "static.adtidy.org",
+    // 迅雷
+    "+.sandai.net",
+    "+.n0808.com",
+    // T-mobile and Ultra Mobile wifi calling
+    "+.3gppnetwork.org",
+    // UU Plugin
+    "+.uu.163.com",
+    "ps.res.netease.com",
+    // 向日葵远程控制
+    "+.oray.com",
+    "+.orayimg.com",
+    "WORKGROUP",
   ],
-  "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8","223.6.6.6","114.114.114.114"],
+  "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8","223.6.6.6","114.114.114.114","1.12.12.12",
+  "120.53.53.53",'[2400:3200::1]','[2400:3200:baba::1]','[2402:4e00::]'],
   "fallback": ["tls://8.8.4.4","tls://1.1.1.1"],
   "nameserver": [...domesticNameservers, ...foreignNameservers],
   "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
@@ -328,7 +603,6 @@ const rules = [
 const groupBaseOption = {
   "interval": 150,
   "timeout": 3000,
-  "url": "https://www.google.com/generate_204",
   "lazy": false,
   "max-failed-times": 3,
 };
@@ -340,10 +614,20 @@ function main(config) {
     typeof config?.["proxy-providers"] === "object" ? Object.keys(config["proxy-providers"]).length : 0;
   if (proxyCount === 0 && proxyProviderCount === 0) {
     throw new Error("配置文件中未找到任何代理");
-  }
+  };
 
   // 覆盖原配置中DNS配置
   config["dns"] = dnsConfig;
+  config["profile"] = profileConfig;
+  config["unified-delay"] = true;
+  config["tcp-concurrent"] = true;
+  config["global-client-fingerprint"] = "random";
+  config["sniffer"] = snifferConfig;
+  config["tun"] = tunConfig;
+  config["geodata-mode"] = true;
+  config["geo-auto-update"] = true;
+  config["geo-update-interval"] = 24;
+  //config["tunnels"] = tunnelsConfig;
 
   // 覆盖原配置中的代理组
   config["proxy-groups"] = [
@@ -352,6 +636,7 @@ function main(config) {
       "name": "🖥️节点选择",
       "type": "select",
       "hidden": false,
+      "url": "https://www.google.com/generate_204",
       "proxies": ["🚄延迟选优", "⚖️负载均衡(散列)", "⚖️负载均衡(轮询)","🌍地区选择","DIRECT"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
     },
@@ -360,6 +645,7 @@ function main(config) {
       "name": "🌍地区选择",
       "type": "select",
       "hidden": false,
+      "url": "https://www.google.com/generate_204",
       "proxies": ["🇧🇷巴西AUTO","🇨🇭瑞士AUTO","🇦🇺澳大利亚AUTO","🇨🇦加拿大AUTO","🇩🇪德国AUTO","🇬🇧英国AUTO","🇭🇰香港AUTO","🇯🇵日本AUTO",
       "🇸🇬新加坡AUTO","🇺🇸美国AUTO","🇹🇼台湾AUTO","👑专线(IEPL)AUTO","🇰🇷韩国AUTO","🇮🇳印度AUTO","🇷🇺俄罗斯AUTO"],
       "icon": "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/categoryglobe.png"
@@ -370,6 +656,7 @@ function main(config) {
       "type": "url-test",
       "tolerance": 50,
       "hidden": false,
+      "url": "https://www.google.com/generate_204",
       "include-all": true,
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg"
     },
@@ -379,6 +666,7 @@ function main(config) {
       "type": "load-balance",
       "strategy": "consistent-hashing",
       "include-all": true,
+      "url": "https://www.google.com/generate_204",
       "hidden": true,
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/merry_go.svg"
     },
@@ -387,6 +675,7 @@ function main(config) {
       "name": "⚖️负载均衡(轮询)",
       "type": "load-balance",
       "strategy": "round-robin",
+      "url": "https://www.google.com/generate_204",
       "include-all": true,
       "hidden": true,
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/balance.svg"
@@ -396,6 +685,7 @@ function main(config) {
       "name": "🔍谷歌服务",
       "type": "select",
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
     },
@@ -404,6 +694,7 @@ function main(config) {
       "name": "📦GitHub",
       "type": "select",
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
     },
@@ -412,6 +703,7 @@ function main(config) {
       "name": "📁icloud云存储",
       "type": "select",
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
     },
@@ -420,6 +712,7 @@ function main(config) {
       "name": "📱电报消息",
       "type": "select",
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/telegram.svg"
     },
@@ -451,7 +744,7 @@ function main(config) {
       ...groupBaseOption,
       "name": "🎥Netflix",
       "type": "select",
-      "url": "https://api.netflix.com",
+      "url": "https://www.netflix.com/title/81280792",
       "expected-status": "200",
       "hidden": true,
       "proxies": ["🖥️节点选择"],
@@ -483,6 +776,7 @@ function main(config) {
       "name": "☁️微软服务",
       "type": "select",
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/microsoft.svg"
     },
@@ -491,6 +785,7 @@ function main(config) {
       "name": "🍎苹果服务",
       "type": "select",
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg"
     },
@@ -499,6 +794,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)专线|IEPL|👑|专转",
       type: "url-test",
@@ -510,6 +806,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)俄罗斯|🇷🇺|RU",
       type: "url-test",
@@ -521,6 +818,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)巴西|🇧🇷|BR",
       type: "url-test",
@@ -532,6 +830,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)瑞士|🇨🇭|CH",
       type: "url-test",
@@ -543,6 +842,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)澳大利亚|🇦🇺|AU",
       type: "url-test",
@@ -554,6 +854,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)加拿大|🇨🇦|CA",
       type: "url-test",
@@ -565,6 +866,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)德国|🇩🇪|DE|Germany",
       type: "url-test",
@@ -576,6 +878,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)英国|🇬🇧|UK",
       type: "url-test",
@@ -587,6 +890,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)印度|🇮🇳|IN",
       type: "url-test",
@@ -598,6 +902,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)香港|Hong Kong|HK|🇭🇰",
       type: "url-test",
@@ -609,6 +914,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)新加坡|Singapore|🇸🇬|SG",
       type: "url-test",
@@ -620,6 +926,7 @@ function main(config) {
       "include-all": true,
       "tolerance": 50,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)日本|Japan|🇯🇵|JP",
       type: "url-test",
@@ -632,6 +939,7 @@ function main(config) {
       "tolerance": 50,
       "include-all": true,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)美国|USA|🇺🇸",
       "proxies": ["REJECT"],
@@ -643,6 +951,7 @@ function main(config) {
       "tolerance": 50,
       "include-all": true,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)台湾|TW|🇹🇼",
       "proxies": ["REJECT"],
@@ -654,6 +963,7 @@ function main(config) {
       "tolerance": 50,
       "include-all": true,
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置",
       filter: "(?i)韩国|🇰🇷|KR|Korea",
       "proxies": ["REJECT"],
@@ -664,7 +974,7 @@ function main(config) {
       "name": "❌广告过滤",
       "type": "select",
       "hidden": true,
-      "proxies": ["REJECT", "DIRECT"],
+      "proxies": ["REJECT"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/bug.svg"
     },
     {
@@ -680,6 +990,7 @@ function main(config) {
       "name": "❗Final",
       "type": "select",
       "hidden": true,
+      "url": "https://www.google.com/generate_204",
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/fish.svg"
     }
