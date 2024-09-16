@@ -380,7 +380,7 @@ proxies:
 proxy-providers:
   机场名称: 
     type: http
-    interval: 86400
+    interval: 43200
     url: "机场链接"
     path: ./机场/机场名称.yaml
 
