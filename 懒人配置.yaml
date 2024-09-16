@@ -1,3 +1,11 @@
+#此处填写你的机场订阅链接
+proxy-providers:
+  机场名称: 
+    type: http
+    interval: 43200
+    url: "机场链接"
+    path: ./机场/机场名称.yaml
+    
 mode: rule
 mixed-port: 59146
 allow-lan: false
@@ -374,15 +382,8 @@ tun:
 unified-delay: true
 bind-address: '*'
 global-client-fingerprint: random
-proxies:
 
-#此处填写你的机场订阅链接
-proxy-providers:
-  机场名称: 
-    type: http
-    interval: 43200
-    url: "机场链接"
-    path: ./机场/机场名称.yaml
+proxies:
 
 proxy-groups:
 - interval: 120
