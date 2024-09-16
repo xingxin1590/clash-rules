@@ -2,8 +2,7 @@
 const domesticNameservers = [
   "https://dns.alidns.com/dns-query", // 阿里云公共DNS
   "https://doh.pub/dns-query", // 腾讯DNSPod
-  "https://doh.360.cn/dns-query", // 360安全DNS
-  "https://dns.alidns.com/dns-query//h3=true",
+  "https://doh.360.cn/dns-query" // 360安全DNS
 ];
 // 国外DNS服务器
 const foreignNameservers = [
@@ -12,14 +11,7 @@ const foreignNameservers = [
   "https://208.67.222.222/dns-query", // OpenDNS(主)
   "https://208.67.220.220/dns-query", // OpenDNS(备)
   "https://194.242.2.2/dns-query", // Mullvad(主)
-  "https://194.242.2.3/dns-query", // Mullvad(备)
-  "https://1.1.1.2/dns-query//h3=true",
-  "https://1.0.0.2/dns-query//h3=true",
-  "https://[2606:4700:4700::64]/dns-query//h3=true",
-  "https://[2606:4700:4700::6400]/dns-query//h3=true",
-  "8.8.8.8",
-  "8.8.4.4",
-  "https://[2001:4860:4860::6464]/dns-query//h3=true"
+  "https://194.242.2.3/dns-query" // Mullvad(备)
 ];
 
 const profileConfig = {
@@ -355,8 +347,7 @@ const dnsConfig = {
     "+.orayimg.com",
     "WORKGROUP",
   ],
-  "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8","223.6.6.6","114.114.114.114","1.12.12.12",
-  "120.53.53.53",'[2400:3200::1]','[2400:3200:baba::1]','[2402:4e00::]'],
+  "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8"],
   "fallback": ["tls://8.8.4.4","tls://1.1.1.1"],
   "nameserver": [...domesticNameservers, ...foreignNameservers],
   "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
