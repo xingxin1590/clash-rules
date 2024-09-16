@@ -255,13 +255,6 @@ dns:
   - 119.29.29.29
   - 1.1.1.1
   - 8.8.8.8
-  - 223.6.6.6
-  - 114.114.114.114
-  - 1.12.12.12
-  - 120.53.53.53
-  - '[2400:3200::1]'
-  - '[2400:3200:baba::1]'
-  - '[2402:4e00::]'
   fallback:
   - tls://8.8.4.4
   - tls://1.1.1.1
@@ -269,44 +262,27 @@ dns:
   - https://dns.alidns.com/dns-query
   - https://doh.pub/dns-query
   - https://doh.360.cn/dns-query
-  - https://dns.alidns.com/dns-query//h3=true
   - https://1.1.1.1/dns-query
   - https://1.0.0.1/dns-query
   - https://208.67.222.222/dns-query
   - https://208.67.220.220/dns-query
   - https://194.242.2.2/dns-query
   - https://194.242.2.3/dns-query
-  - https://1.1.1.2/dns-query//h3=true
-  - https://1.0.0.2/dns-query//h3=true
-  - https://[2606:4700:4700::64]/dns-query//h3=true
-  - https://[2606:4700:4700::6400]/dns-query//h3=true
-  - 8.8.8.8
-  - 8.8.4.4
-  - https://[2001:4860:4860::6464]/dns-query//h3=true
   proxy-server-nameserver:
   - https://dns.alidns.com/dns-query
   - https://doh.pub/dns-query
   - https://doh.360.cn/dns-query
-  - https://dns.alidns.com/dns-query//h3=true
   - https://1.1.1.1/dns-query
   - https://1.0.0.1/dns-query
   - https://208.67.222.222/dns-query
   - https://208.67.220.220/dns-query
   - https://194.242.2.2/dns-query
   - https://194.242.2.3/dns-query
-  - https://1.1.1.2/dns-query//h3=true
-  - https://1.0.0.2/dns-query//h3=true
-  - https://[2606:4700:4700::64]/dns-query//h3=true
-  - https://[2606:4700:4700::6400]/dns-query//h3=true
-  - 8.8.8.8
-  - 8.8.4.4
-  - https://[2001:4860:4860::6464]/dns-query//h3=true
   nameserver-policy:
     geosite:private,cn,geolocation-cn:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
     - https://doh.360.cn/dns-query
-    - https://dns.alidns.com/dns-query//h3=true
     geosite:google,youtube,telegram,gfw,Microsoft,OpenAI,TikTok,github,geolocation-!cn:
     - https://1.1.1.1/dns-query
     - https://1.0.0.1/dns-query
@@ -314,13 +290,6 @@ dns:
     - https://208.67.220.220/dns-query
     - https://194.242.2.2/dns-query
     - https://194.242.2.3/dns-query
-    - https://1.1.1.2/dns-query//h3=true
-    - https://1.0.0.2/dns-query//h3=true
-    - https://[2606:4700:4700::64]/dns-query//h3=true
-    - https://[2606:4700:4700::6400]/dns-query//h3=true
-    - 8.8.8.8
-    - 8.8.4.4
-    - https://[2001:4860:4860::6464]/dns-query//h3=true
 tun:
   enable: false
   stack: mixed
