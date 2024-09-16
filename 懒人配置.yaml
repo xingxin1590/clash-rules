@@ -8,7 +8,7 @@ proxy-providers:
 mode: rule
 allow-lan: true
 log-level: info
-external-controller: 127.0.0.1:9097
+external-controller: 127.0.0.1:9090
 tcp-concurrent: true
 sniffer:
   enable: true
