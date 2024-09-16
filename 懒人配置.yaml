@@ -378,7 +378,7 @@ proxies:
 
 #此处填写你的机场订阅链接
 proxy-providers:
-  星遇: 
+  机场名称: 
     type: http
     interval: 86400
     url: "机场链接"
