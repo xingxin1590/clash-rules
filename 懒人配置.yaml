@@ -352,7 +352,7 @@ proxy-groups:
   max-failed-times: 3
   name: 🚄延迟选优
   type: url-test
-  tolerance: 50
+  tolerance: 1
   hidden: false
   url: https://www.google.com/generate_204
   include-all: true
@@ -450,7 +450,7 @@ proxy-groups:
   max-failed-times: 3
   name: 🤖ChatGPT
   type: url-test
-  tolerance: 50
+  tolerance: 1
   url: https://chatgpt.com
   expected-status: '200'
   include-all: true
@@ -463,7 +463,7 @@ proxy-groups:
   max-failed-times: 3
   name: 🎵TikTok
   type: url-test
-  tolerance: 50
+  tolerance: 1
   url: https://www.tiktok.com
   expected-status: '200'
   include-all: true
@@ -476,7 +476,7 @@ proxy-groups:
   max-failed-times: 3
   name: 🎥Netflix
   type: url-test
-  tolerance: 50
+  tolerance: 1
   url: https://www.netflix.com/title/81280792
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|官网
   expected-status: '200'
@@ -501,8 +501,8 @@ proxy-groups:
   max-failed-times: 3
   name: ▶️YouTuBe
   type: url-test
-  tolerance: 50
-  url: https://www.youtube.com/watch?v=bclV6mAkeYw
+  tolerance: 1
+  url: https://www.youtube.com
   expected-status: '200'
   hidden: false
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|官网
@@ -532,7 +532,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg
 - name: 👑专线(IEPL)AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -543,7 +543,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
 - name: 🇷🇺俄罗斯AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -554,7 +554,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
 - name: 🇧🇷巴西AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -565,7 +565,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
 - name: 🇨🇭瑞士AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -576,7 +576,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
 - name: 🇦🇺澳大利亚AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -587,7 +587,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
 - name: 🇨🇦加拿大AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -598,7 +598,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
 - name: 🇩🇪德国AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -609,7 +609,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
 - name: 🇬🇧英国AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -620,7 +620,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
 - name: 🇮🇳印度AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -631,7 +631,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
 - name: 🇭🇰香港AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -642,7 +642,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
 - name: 🇸🇬新加坡AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -653,7 +653,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg
 - name: 🇯🇵日本AUTO
   include-all: true
-  tolerance: 50
+  tolerance: 1
   hidden: true
   url: https://www.google.com/generate_204
   exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
@@ -664,7 +664,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/jp.svg
 - name: 🇺🇸美国AUTO
   type: url-test
-  tolerance: 50
+  tolerance: 1
   include-all: true
   hidden: true
   url: https://www.google.com/generate_204
@@ -675,7 +675,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg
 - name: 🇹🇼台湾AUTO
   type: url-test
-  tolerance: 50
+  tolerance: 1
   include-all: true
   hidden: true
   url: https://www.google.com/generate_204
@@ -686,7 +686,7 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg
 - name: 🇰🇷韩国AUTO
   type: url-test
-  tolerance: 50
+  tolerance: 1
   include-all: true
   hidden: true
   url: https://www.google.com/generate_204
