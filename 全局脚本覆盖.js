@@ -567,7 +567,6 @@ function main(config) {
       "url": "https://chatgpt.com",
       "expected-status": "200",
       "include-all": true,
-      "hidden": false,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong",
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg"
     },
@@ -579,8 +578,8 @@ function main(config) {
       "url": "https://www.tiktok.com",
       "expected-status": "200",
       "include-all": true,
+      hidden:false,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong",
-      "hidden": false,
       "icon": "https://www.clashverge.dev/assets/icons/tiktok.svg"
     },
     {
