@@ -376,8 +376,6 @@ const subrules = {
     "DOMAIN-REGEX, ^(?:(?!ext)(.*short)|(.+long)).weixin.qq.com, ✔️全局直连 "],// 微信消息"
 };
 const rules = [
-  //DNS 出站会将请求劫持到内部 dns 模块，所有请求均在内部处理
-  //"DST-PORT, 53, dns-out",
   //微信 FCM 相关
   "SUB-RULE,(OR,((NETWORK,TCP),(NETWORK,UDP))),📢 微信 FCM 方案2",
   // 防止 YouTube 等使用 QUIC 导致速度不佳, 禁用 443 端口 UDP 流量（不包括国内）
@@ -427,8 +425,23 @@ const groupBaseOption = {
   "interval": 120,
   "timeout": 3000,
   "lazy": false,
+  "hidden":true,
   "url": "https://www.google.com/generate_204",
   "max-failed-times": 3,
+};
+// 散列负载均衡通用配置
+const grouphashOption = {
+  "type": "load-balance",
+  "strategy": "consistent-hashing",
+  "include-all": true,
+  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
+};
+// 轮询负载均衡通用配置
+const grouprobinOption = {
+  "type": "load-balance",
+  "strategy": "round-robin",
+  "include-all": true,
+  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
 };
 
 // 程序入口
@@ -462,7 +475,7 @@ function main(config) {
       "name": "🖥️节点选择",
       "type": "select",
       "hidden": false,
-      "proxies": ["🚄延迟选优", "🌍地区选择","⚖️负载均衡(散列)", "⚖️负载均衡(轮询)","🚑故障转移","DIRECT"],
+      "proxies": ["🚄延迟选优", "🌍地区选择","⚖️地区负载均衡","⚖️All负载均衡(散列)", "⚖️All负载均衡(轮询)","🚑故障转移","DIRECT"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
     },
     {
@@ -485,20 +498,22 @@ function main(config) {
     },
     {
       ...groupBaseOption,
-      "name": "⚖️负载均衡(散列)",
-      "type": "load-balance",
-      "strategy": "consistent-hashing",
-      "include-all": true,
-      "hidden": true,
+      "name": "⚖️地区负载均衡",
+      "type": "select",
+      "hidden": false,
+      "proxies": ["👑专线(IEPL)(散列)","👑专线(IEPL)(轮询)","🇭🇰香港(散列)","🇭🇰香港(轮询)"],
+      "icon": "https://www.clashverge.dev/assets/icons/balance.svg"
+    },
+    {
+      ...groupBaseOption,
+      ...grouphashOption,
+      "name": "⚖️All负载均衡(散列)",
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/merry_go.svg"
     },
     {
       ...groupBaseOption,
-      "name": "⚖️负载均衡(轮询)",
-      "type": "load-balance",
-      "strategy": "round-robin",
-      "include-all": true,
-      "hidden": true,
+      ...grouprobinOption,
+      "name": "⚖️All负载均衡(轮询)",
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/balance.svg"
     },
     {
@@ -513,7 +528,6 @@ function main(config) {
       ...groupBaseOption,
       "name": "🔍谷歌服务",
       "type": "select",
-      "hidden": true,
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
     },
@@ -521,7 +535,6 @@ function main(config) {
       ...groupBaseOption,
       "name": "📦GitHub",
       "type": "select",
-      "hidden": true,
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
     },
@@ -529,7 +542,6 @@ function main(config) {
       ...groupBaseOption,
       "name": "🎮Twitch",
       "type": "select",
-      "hidden": true,
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
     },
@@ -537,7 +549,6 @@ function main(config) {
       ...groupBaseOption,
       "name": "📁icloud云存储",
       "type": "select",
-      "hidden": true,
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
     },
@@ -545,7 +556,6 @@ function main(config) {
       ...groupBaseOption,
       "name": "📱电报消息",
       "type": "select",
-      "hidden": true,
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/telegram.svg"
     },
@@ -576,13 +586,10 @@ function main(config) {
     {
       ...groupBaseOption,
       "name": "🎥Netflix",
-      "type": "url-test",
-      "tolerance": 1,
+      "type": "select",
       "url": "https://www.netflix.com/title/81280792",
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|官网",
       "expected-status": "200",
-      "hidden": true,
-      "include-all" :true,
+      "proxies": ["🖥️节点选择"],
       "icon": "https://www.clashverge.dev/assets/icons/netflix.svg"
     },
     {
@@ -591,35 +598,29 @@ function main(config) {
       "type": "select",
       "url": "https://emby.media/",
       "expected-status": "200",
-      "hidden": true,
       "proxies": ["🖥️节点选择"],
       "icon": "https://www.clashverge.dev/assets/icons/netflix.svg"
     },
     {
       ...groupBaseOption,
       "name": "▶️YouTuBe",
-      "type": "url-test",
-      "tolerance": 1,
+      "type": "select",
       "url": "https://www.youtube.com",
       "expected-status": "200",
-      "hidden": true,
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|官网",
       "proxies": ["🖥️节点选择"],
       "icon": "https://www.clashverge.dev/assets/icons/youtube.svg"
     },
     {
       ...groupBaseOption,
       "name": "☁️微软服务",
-      "type": "select",
-      "hidden": true,
+      "type": "select",       
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/microsoft.svg"
     },
     {
       ...groupBaseOption,
       "name": "🍎苹果服务",
-      "type": "select",
-      "hidden": true,
+      "type": "select",      
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg"
     },
@@ -628,7 +629,6 @@ function main(config) {
       name: "👑专线(IEPL)AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)专线|IEPL|👑|专转",
       type: "url-test",
@@ -637,10 +637,37 @@ function main(config) {
     },
     {
       ...groupBaseOption,
+      ...grouphashOption,
+      name: "👑专线(IEPL)(散列)",   
+      filter: "(?i)专线|IEPL|👑|专转",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },
+    {
+      ...groupBaseOption,
+      ...grouprobinOption,
+      name: "👑专线(IEPL)(轮询)",  
+      filter: "(?i)专线|IEPL|👑|专转",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },
+    {
+      ...groupBaseOption,
+      ...grouphashOption,
+      name: "🇭🇰香港(散列)",
+      filter: "(?i)香港|Hong Kong|🇭🇰",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },
+    {
+      ...groupBaseOption,
+      ...grouprobinOption,
+      name: "🇭🇰香港(轮询)",
+      filter: "(?i)香港|Hong Kong|🇭🇰",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },
+    {
+      ...groupBaseOption,
       name: "🇷🇺俄罗斯AUTO",
       "include-all": true,
-      "tolerance": 1,
-      "hidden": true,
+      "tolerance": 1,     
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)俄罗斯|🇷🇺",
       type: "url-test",
@@ -652,7 +679,6 @@ function main(config) {
       name: "🇧🇷巴西AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)巴西|🇧🇷",
       type: "url-test",
@@ -664,7 +690,6 @@ function main(config) {
       name: "🇨🇭瑞士AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)瑞士|🇨🇭",
       type: "url-test",
@@ -676,7 +701,6 @@ function main(config) {
       name: "🇦🇺澳大利亚AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)澳大利亚|🇦🇺",
       type: "url-test",
@@ -688,7 +712,6 @@ function main(config) {
       name: "🇨🇦加拿大AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)加拿大|🇨🇦",
       type: "url-test",
@@ -700,7 +723,6 @@ function main(config) {
       name: "🇩🇪德国AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)德国|🇩🇪|Germany",
       type: "url-test",
@@ -712,7 +734,6 @@ function main(config) {
       name: "🇬🇧英国AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)英国|🇬🇧",
       type: "url-test",
@@ -724,7 +745,6 @@ function main(config) {
       name: "🇮🇳印度AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)印度|🇮🇳",
       type: "url-test",
@@ -736,7 +756,7 @@ function main(config) {
       name: "🇭🇰香港AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
+       
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)香港|Hong Kong|🇭🇰",
       type: "url-test",
@@ -748,7 +768,7 @@ function main(config) {
       name: "🇸🇬新加坡AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
+       
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)新加坡|Singapore|🇸🇬",
       type: "url-test",
@@ -760,7 +780,7 @@ function main(config) {
       name: "🇯🇵日本AUTO",
       "include-all": true,
       "tolerance": 1,
-      "hidden": true,
+       
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)日本|Japan|🇯🇵",
       type: "url-test",
@@ -773,7 +793,7 @@ function main(config) {
       type: "url-test",
       "tolerance": 1,
       "include-all": true,
-      "hidden": true,
+       
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)美国|🇺🇸",
       "proxies": ["REJECT"],
@@ -785,7 +805,7 @@ function main(config) {
       type: "url-test",
       "tolerance": 1,
       "include-all": true,
-      "hidden": true,
+       
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)台湾|🇹🇼",
       "proxies": ["REJECT"],
@@ -797,7 +817,7 @@ function main(config) {
       type: "url-test",
       "tolerance": 1,
       "include-all": true,
-      "hidden": true,
+       
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网",
       filter: "(?i)韩国|🇰🇷|Korea",
       "proxies": ["REJECT"],
@@ -807,7 +827,7 @@ function main(config) {
       ...groupBaseOption,
       "name": "❌广告过滤",
       "type": "select",
-      "hidden": true,
+       
       "proxies": ["REJECT"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/bug.svg"
     },
@@ -815,7 +835,7 @@ function main(config) {
       ...groupBaseOption,
       "name": "✔️全局直连",
       "type": "select",
-      "hidden": true,
+       
       "proxies": ["DIRECT"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg"
     },
@@ -823,7 +843,7 @@ function main(config) {
       ...groupBaseOption,
       "name": "❗Final",
       "type": "select",
-      "hidden": true,
+       
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/fish.svg"
     }
