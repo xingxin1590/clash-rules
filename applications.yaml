@@ -1,4 +1,7 @@
 payload:
+  - IP-CIDR, 43.130.194.0/23,no-resolve # 微信
+  - IP-CIDR, 43.156.192.0/18,no-resolve # 微信
+  - IP-CIDR, 43.157.69.0/18, no-resolve # 微信
   - PROCESS-NAME,com.sankuai.meituan
   - PROCESS-NAME,com.tencent.mobileqq
   - PROCESS-NAME,com.tencent.mm
