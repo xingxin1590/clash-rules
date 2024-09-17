@@ -1,6 +1,6 @@
 // 国内DNS服务器
 const domesticNameservers = [
-  //"https://dns.alidns.com/dns-query", // 阿里云公共DNS
+  "https://dns.alidns.com/dns-query", // 阿里云公共DNS
   "https://doh.pub/dns-query", // 腾讯DNSPod
   "https://doh.360.cn/dns-query", // 360安全DNS
   "https://156.154.70.2/dns-query",//UltraDNS
@@ -14,9 +14,6 @@ const foreignNameservers = [
   "https://208.67.220.220/dns-query", // OpenDNS(备)
   "https://194.242.2.2/dns-query", // Mullvad(主)
   "https://194.242.2.3/dns-query", // Mullvad(备)
-  "https://doh-lb-atl.dnsflex.com/dns-query",//DNSFlex-DOH
-  "https://doh-lb-br.dnsflex.com/dns-query",//DNSFlex-DOH
-  "https://doh-lb-ca-tor.dnsflex.com/dns-query"//DNSFlex-DOH
 ];
 
 const profileConfig = {
