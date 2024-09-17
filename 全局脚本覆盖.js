@@ -1,8 +1,10 @@
 // 国内DNS服务器
 const domesticNameservers = [
-  "https://dns.alidns.com/dns-query", // 阿里云公共DNS
+  //"https://dns.alidns.com/dns-query", // 阿里云公共DNS
   "https://doh.pub/dns-query", // 腾讯DNSPod
-  "https://doh.360.cn/dns-query" // 360安全DNS
+  "https://doh.360.cn/dns-query", // 360安全DNS
+  "https://156.154.70.2/dns-query",//UltraDNS
+  "https://156.154.71.2/dns-query"//UltraDNS
 ];
 // 国外DNS服务器
 const foreignNameservers = [
@@ -11,7 +13,10 @@ const foreignNameservers = [
   "https://208.67.222.222/dns-query", // OpenDNS(主)
   "https://208.67.220.220/dns-query", // OpenDNS(备)
   "https://194.242.2.2/dns-query", // Mullvad(主)
-  "https://194.242.2.3/dns-query" // Mullvad(备)
+  "https://194.242.2.3/dns-query", // Mullvad(备)
+  "https://doh-lb-atl.dnsflex.com/dns-query",//DNSFlex-DOH
+  "https://doh-lb-br.dnsflex.com/dns-query",//DNSFlex-DOH
+  "https://doh-lb-ca-tor.dnsflex.com/dns-query"//DNSFlex-DOH
 ];
 
 const profileConfig = {
@@ -42,8 +47,8 @@ const snifferConfig = {
     TLS : {
       ports: [
         "443",
-        "8443",
         "5228",
+        "8443",
       ]
     },
     HTTP : {
@@ -121,240 +126,78 @@ const dnsConfig = {
   "enhanced-mode": "fake-ip",
   "fake-ip-filter-mode": "blacklist",
   "fake-ip-range": "198.18.0.1/16",
-      "fallback-filter": {
-        "geoip": true,
-        "ip-cidr": [
-            "127.0.0.1/8",
-            "0.0.0.0/32",
-            "0.0.0.0/8",
-            "10.0.0.0/8",
-            "100.64.0.0/10",
-            "127.0.0.0/8",
-            "169.254.0.0/16",
-            "172.16.0.0/12",
-            "192.0.0.0/24",
-            "192.0.2.0/24",
-            "192.168.0.0/16",
-            "192.88.99.0/24",
-            "198.18.0.0/15",
-            "198.51.100.0/24",
-            "203.0.113.0/24",
-            "224.0.0.0/4",
-            "240.0.0.0/4",
-            "255.255.255.255/32",
-        ],
-        "domain": [
-            "+.google.com",
-            "+.facebook.com",
-            "+.twitter.com",
-            "+.instagram.com",
-            "+.netfix.com",
-            "+.hbo.com",
-            "+.disneyplus.com",
-            "+.github.com",
-            "+.githubusercontent.com",
-            "+.youtube.com",
-            "+.xn--ngstr-lra8j.com",
-            "+.google.cn",
-            "+.googlevideo.com",
-            "+.googleapis.cn",
-            "+.x.com",
-            "+.tiktok.com",
-            "+.googleapis.com",
-            "+.gvt1.com"
-        ]
-    },
+  "fallback-filter": {
+    "geoip": true,
+    "geoip-code":"CN",
+    "geosipite":["gfw"],
+    "ip-cidr": [
+        "127.0.0.1/8",
+        "0.0.0.0/32",
+        "0.0.0.0/8",
+        "10.0.0.0/8",
+        "100.64.0.0/10",
+        "127.0.0.0/8",
+        "169.254.0.0/16",
+        "172.16.0.0/12",
+        "192.0.0.0/24",
+        "192.0.2.0/24",
+        "192.168.0.0/16",
+        "192.88.99.0/24",
+        "198.18.0.0/15",
+        "198.51.100.0/24",
+        "203.0.113.0/24",
+        "224.0.0.0/4",
+        "240.0.0.0/4",
+        "255.255.255.255/32",
+    ],
+    "domain": [
+        "+.google.com",
+        "+.facebook.com",
+        "+.twitter.com",
+        "+.instagram.com",
+        "+.netfix.com",
+        "+.hbo.com",
+        "+.disneyplus.com",
+        "+.github.com",
+        "+.githubusercontent.com",
+        "+.youtube.com",
+        "+.xn--ngstr-lra8j.com",
+        "+.google.cn",
+        "+.googlevideo.com",
+        "+.googleapis.cn",
+        "+.x.com",
+        "+.tiktok.com",
+        "+.googleapis.com",
+        "+.gvt1.com"
+    ]
+  },
   "fake-ip-filter": [
-    // 本地主机/设备
-    "+.lan",
-    "+.private",
-    "+.cn",
-    "+.local",
-    "*.localdomain",
-    // Windows网络出现小地球图标
-    "+.msftconnecttest.com",
-    "+.msftncsi.com",
-    // QQ快速登录检测失败
-    "localhost.ptlogin2.qq.com",
-    "localhost.sec.qq.com",
-    // 微信快速登录检测失败
-    "localhost.work.weixin.qq.com",
-    "localhost.weixin.qq.com",
-    // 主动嗅探 Google FCM 和 DL 服务器
-    "alt1-mtalk.google.com",
-    "alt2-mtalk.google.com",
-    "alt3-mtalk.google.com",
-    "alt4-mtalk.google.com",
-    "alt5-mtalk.google.com",
-    "alt6-mtalk.google.com",
-    "alt7-mtalk.google.com",
-    "alt8-mtalk.google.com",
-    "mtalk.google.com",
-    "dl.google.com",
-    "dl.l.google.com",
-    "+.example",
-    "+.invalid",
-    "+.localhost",
-    "+.test",
-    "+.local",
-    "+.home.arpa",
-    // 放行NTP服务
-    "time.*.com",
-    "time.*.gov",
-    "time.*.edu.cn",
-    "time.*.apple.com",
-    "time-ios.apple.com",
-    "time1.*.com",
-    "time2.*.com",
-    "time3.*.com",
-    "time4.*.com",
-    "time5.*.com",
-    "time6.*.com",
-    "time7.*.com",
-    "ntp.*.com",
-    "ntp1.*.com",
-    "ntp2.*.com",
-    "ntp3.*.com",
-    "ntp4.*.com",
-    "ntp5.*.com",
-    "ntp6.*.com",
-    "ntp7.*.com",
-    "*.time.edu.cn",
-    "*.ntp.org.cn",
-    "+.pool.ntp.org",
-    "time1.cloud.tencent.com",
-    // 放行网易云音乐
-    "music.163.com",
-    "*.music.163.com",
-    "*.126.net",
-    // 百度音乐
-    "musicapi.taihe.com",
-    "music.taihe.com",
-    // 酷狗音乐
-    "songsearch.kugou.com",
-    "trackercdn.kugou.com",
-    // 酷我音乐
-    "*.kuwo.cn",
-    // JOOX音乐
-    "api-jooxtt.sanook.com",
-    "api.joox.com",
-    "joox.com",
-    // QQ音乐
-    "y.qq.com",
-    "*.y.qq.com",
-    "streamoc.music.tc.qq.com",
-    "mobileoc.music.tc.qq.com",
-    "isure.stream.qqmusic.qq.com",
-    "dl.stream.qqmusic.qq.com",
-    "aqqmusic.tc.qq.com",
-    "amobile.music.tc.qq.com",
-    // 虾米音乐
-    "*.xiami.com",
-    // 咪咕音乐
-    "*.music.migu.cn",
-    "music.migu.cn",
-    // win10本地连接检测
-    "+.msftconnecttest.com",
-    "+.msftncsi.com",
-    // QQ登录
-    "localhost.ptlogin2.qq.com",
-    "localhost.sec.qq.com",
-    "+.qq.com",
-    "+.tencent.com",
-    // Game
-    // Steam
-    "+.steamcontent.com",
-    // Nintendo Switch
-    "+.srv.nintendo.net",
-    "*.n.n.srv.nintendo.net",
-    "+.cdn.nintendo.net",
-    // Sony PlayStation
-    "+.stun.playstation.net",
-    // Microsoft Xbox
-    "xbox.*.*.microsoft.com",
-    "*.*.xboxlive.com",
-    "xbox.*.microsoft.com",
-    "xnotify.xboxlive.com",
-    // Wotgame
-    "+.battlenet.com.cn",
-    "+.wotgame.cn",
-    "+.wggames.cn",
-    "+.wowsgame.cn",
-    "+.wargaming.net",
-    // Golang
-    "proxy.golang.org",
-    // STUN
-    "stun.*.*",
-    "stun.*.*.*",
-    "+.stun.*.*",
-    "+.stun.*.*.*",
-    "+.stun.*.*.*.*",
-    "+.stun.*.*.*.*.*",
-    // Linksys Router
-    "heartbeat.belkin.com",
-    "*.linksys.com",
-    "*.linksyssmartwifi.com",
-    // ASUS Router
-    "*.router.asus.com",
-    // Apple Software Update Service
-    "mesu.apple.com",
-    "swscan.apple.com",
-    "swquery.apple.com",
-    "swdownload.apple.com",
-    "swcdn.apple.com",
-    "swdist.apple.com",
-    // Google
-    "lens.l.google.com",
-    "stun.l.google.com",
-    "na.b.g-tun.com",
-    // Netflix
-    "+.nflxvideo.net",
-    // FinalFantasy XIV Worldwide Server & CN Server
-    "*.square-enix.com",
-    "*.finalfantasyxiv.com",
-    "*.ffxiv.com",
-    "*.ff14.sdo.com",
-    "ff.dorado.sdo.com",
-    // Bilibili
-    "*.mcdn.bilivideo.cn",
-    // Disney Plus
-    "+.media.dssott.com",
-    // shark007 Codecs
-    "shark007.net",
-    // Mijia
-    "Mijia Cloud",
-    // Xiaomi
-    "+.market.xiaomi.com",
-    // 招商银行
-    "+.cmbchina.com",
-    "+.cmbimg.com",
-    // AdGuard
-    "adguardteam.github.io",
-    "adrules.top",
-    "anti-ad.net",
-    "local.adguard.org",
-    "static.adtidy.org",
-    // 迅雷
-    "+.sandai.net",
-    "+.n0808.com",
-    // T-mobile and Ultra Mobile wifi calling
-    "+.3gppnetwork.org",
-    // UU Plugin
-    "+.uu.163.com",
-    "ps.res.netease.com",
-    // 向日葵远程控制
-    "+.oray.com",
-    "+.orayimg.com",
-    "WORKGROUP",
+    //国内及常用
+    "geosite:cn,private,microsoft@cn,onedrive,category-companies@cn,category-ntp,steam@cn,category-entertainment@cn,category-enhance-gaming@cn,category-games@cn",
+    //Goole FCM服务器
+    "geosite:googlefcm",
+    "rule-set:fake-ip-filter",
   ],
-  "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8"],
+  "default-nameserver": ["223.5.5.5", "223.6.6.6", "1.12.12.12", "120.53.53.53"],
   "fallback": ["tls://8.8.4.4","tls://1.1.1.1"],
   "nameserver": [...domesticNameservers, ...foreignNameservers],
   "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
   "nameserver-policy": {
     "geosite:private,cn,geolocation-cn": domesticNameservers,
     "geosite:google,youtube,telegram,gfw,Microsoft,OpenAI,TikTok,github,geolocation-!cn": foreignNameservers,
+    "geosite:googlefcm":["https://223.5.5.5/dns-query#h3=true", "https://1.12.12.12/dns-query", "[2400:3200::1]", "[2400:3200:baba::1]", "[2402:4e00::]"],
   }
+};
+//服务端启用。入站监听类型
+const listenersConfig = {
+// 配置 shadowsocks 入站，即创建 shadowsocks 代理
+  name: "ss-in", 
+  type: "shadowsocks", 
+  port: 10001, 
+  listen: "0.0.0.0", 
+  cipher: "2022-blake3-aes-256-gcm", 
+  password: "vlmpIPSyHH6f4S8WVPdRIHIlzmB+GIRfoH3aNJ/t9Gg=", 
+  udp: true
 };
 // 规则集通用配置
 const ruleProviderCommon = {
@@ -364,6 +207,12 @@ const ruleProviderCommon = {
 };
 // 规则集配置
 const ruleProviders = {
+  "fake-ip-filter": {
+    ...ruleProviderCommon,
+    "behavior": "domain",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/fake-ip-filter.yaml",
+    "path": "./ruleset/loyalsoldier/fake-ip-filter.yaml"
+  },
   "reject": {
     ...ruleProviderCommon,
     "behavior": "domain",
@@ -510,7 +359,31 @@ const ruleProviders = {
   }
 };
 // 规则
+const subrules = {
+  "📢 微信 FCM 方案1":[
+    // Google FCM
+    "GEOSITE, googlefcm, ✔️全局直连 ",// Google FCM 推送"
+    // 微信 - Google FCM
+    "AND,((OR,((AND,((DOMAIN-REGEX,^.*long.weixin.qq.com),(OR,((DST-PORT,80),(DST-PORT,8080),(DST-PORT,443))))),(AND,((DOMAIN-REGEX,^.*dns.weixin.qq.com.*))))),(NETWORK,TCP)), 🖥️节点选择 ",// 微信 Google FCM"
+    "AND,((NOT,((GEOIP,cn))),(NOT,((GEOSITE,cn))),(OR,((IP-ASN,45090),(IP-ASN,132203),(IP-ASN,133478)))), 🖥️节点选择 ",// 微信境外 ASN 请求。测试规则
+    "DOMAIN-REGEX, ^(?:(.*short)|(.+long)).weixin.qq.com, ✔️全局直连"],// 微信消息"
+  "📢 微信 FCM 方案2":[
+    // Google FCM
+    "GEOSITE, googlefcm, ✔️全局直连 ",// Google FCM 推送"
+    // 微信 - Google FCM
+    "AND,((OR,((AND,((DOMAIN-REGEX,^.*extshort.weixin.qq.com),(DST-PORT,80))),(AND,((DOMAIN-REGEX,^.*long.weixin.qq.com),(OR,((DST-PORT,80),(DST-PORT,8080),(DST-PORT,443))))),(AND,((DOMAIN-REGEX,^.*dns.weixin.qq.com.*))))),(NETWORK,TCP)), 🖥️节点选择 ",//微信 Google FCM
+    "AND,((NOT,((GEOIP,cn))),(NOT,((GEOSITE,cn))),(OR,((IP-ASN,45090),(IP-ASN,132203),(IP-ASN,133478)))), 🖥️节点选择 ",// 微信境外 ASN 请求。测试规则
+    "DOMAIN-REGEX, ^(?:(?!ext)(.*short)|(.+long)).weixin.qq.com, ✔️全局直连 "],// 微信消息"
+};
 const rules = [
+  //DNS 出站会将请求劫持到内部 dns 模块，所有请求均在内部处理
+  //"DST-PORT, 53, dns-out",
+  //微信 FCM 相关
+  "SUB-RULE,(OR,((NETWORK,TCP),(NETWORK,UDP))),📢 微信 FCM 方案2",
+  // 防止 YouTube 等使用 QUIC 导致速度不佳, 禁用 443 端口 UDP 流量（不包括国内）
+  "AND,((DST-PORT,443),(NETWORK,UDP),(NOT,((GEOSITE,cn))),(NOT,((GEOIP,cn))),(NOT,((IP-ASN,45090))),(NOT,((IP-ASN,132203))),(NOT,((IP-ASN,133478))),(NOT,((IP-ASN,59054))),(NOT,((IP-ASN,59054))),(NOT,((IP-ASN,59053))),(NOT,((IP-ASN,59052))),(NOT,((IP-ASN,59051))),(NOT,((IP-ASN,59028))),(NOT,((IP-ASN,45104))),(NOT,((IP-ASN,45103))),(NOT,((IP-ASN,37963))),(NOT,((IP-CIDR,223.5.5.5/32))),(NOT,((IP-CIDR,1.12.12.12/32))),(NOT,((IP-CIDR,94.140.14.14/32)))),❌广告过滤",
+  // 阿里巴巴。淘宝、支付宝等
+  "OR,((GEOSITE,alibaba),(IP-ASN,59054),(IP-ASN,59054),(IP-ASN,59053),(IP-ASN,59052),(IP-ASN,59051),(IP-ASN,59028),(IP-ASN,45104),(IP-ASN,45103),(IP-ASN,37963)), ✔️全局直连",
   //包名
   "PROCESS-NAME,org.torproject.torbrowser,🖥️节点选择",
   "PROCESS-NAME,com.cccbb.abc,🖥️节点选择",
@@ -546,6 +419,7 @@ const rules = [
   // 其他规则
   "GEOIP,LAN,✔️全局直连,no-resolve",
   "GEOIP,CN,✔️全局直连,no-resolve",
+  "GEOIP,private,✔️全局直连,no-resolve",
   "MATCH,❗Final"
 ];
 // 代理组通用配置
@@ -578,6 +452,8 @@ function main(config) {
   config["geo-auto-update"] = true;
   config["geo-update-interval"] = 24;
   //config["tunnels"] = tunnelsConfig;
+  //config["listeners"] = listenersConfig;
+  config["sub-rules"] = subrules;
 
   // 覆盖原配置中的代理组
   config["proxy-groups"] = [
@@ -726,9 +602,9 @@ function main(config) {
       "tolerance": 1,
       "url": "https://www.youtube.com",
       "expected-status": "200",
-      "hidden": false,
+      "hidden": true,
       "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|官网",
-      "include-all":true,
+      "proxies": ["🖥️节点选择"],
       "icon": "https://www.clashverge.dev/assets/icons/youtube.svg"
     },
     {
