@@ -79,6 +79,7 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
     - https://doh.360.cn/dns-query
+    - https://116.169.2.207/dns-query
     - https://1.1.1.1/dns-query
     - https://1.0.0.1/dns-query
     - https://208.67.222.222/dns-query
@@ -89,6 +90,7 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
     - https://doh.360.cn/dns-query
+    - https://116.169.2.207/dns-query
     - https://1.1.1.1/dns-query
     - https://1.0.0.1/dns-query
     - https://208.67.222.222/dns-query
@@ -100,6 +102,7 @@ dns:
       - https://dns.alidns.com/dns-query
       - https://doh.pub/dns-query
       - https://doh.360.cn/dns-query
+      - https://116.169.2.207/dns-query
     geosite:google,youtube,telegram,gfw,microsoft,openai,tiktok,github,geolocation-!cn:
       - https://1.1.1.1/dns-query
       - https://1.0.0.1/dns-query
@@ -126,6 +129,8 @@ proxy-groups:
     proxies:
       - 🚄延迟选优
       - 🌍地区选择
+      - 🟢倍率选择
+      - 🔴剔除倍率选择
       - ⚖️地区负载均衡
       - ⚖️All负载均衡(散列)
       - ⚖️All负载均衡(轮询)
@@ -157,6 +162,29 @@ proxy-groups:
       - 🇮🇳印度AUTO
       - 🇷🇺俄罗斯AUTO
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/categoryglobe.png
+  - interval: 60
+    timeout: 3000
+    lazy: false
+    hidden: false
+    url: https://www.google.com/generate_204
+    max-failed-times: 3
+    type: select
+    name: 🟢倍率选择
+    include-all: true
+    filter: (?i)倍率|倍|×|✖|x|X|✕|⨉
+    icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png
+  - interval: 60
+    timeout: 3000
+    lazy: false
+    hidden: false
+    url: https://www.google.com/generate_204
+    max-failed-times: 3
+    type: url-test
+    include-all: true
+    tolerance: 1
+    name: 🔴剔除倍率选择
+    exclude-filter: (?i)倍率|倍|×|✖|x|X|✕|⨉
+    icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png
   - interval: 60
     timeout: 3000
     lazy: false
@@ -894,4 +922,5 @@ geox-url:
   geosite: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
   mmdb: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb
   asn: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb
+
 
