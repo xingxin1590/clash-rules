@@ -3,6 +3,7 @@ const domesticNameservers = [
   "https://dns.alidns.com/dns-query", // 阿里云公共DNS
   "https://doh.pub/dns-query", // 腾讯DNSPod
   "https://doh.360.cn/dns-query", // 360安全DNS
+  "https://116.169.2.207/dns-query",//中国四川联通DNS
 ];
 // 国外DNS服务器
 const foreignNameservers = [
@@ -407,7 +408,7 @@ function main(config) {
       "name": "🖥️节点选择",
       "type": "select",
       "hidden": false,
-      "proxies": ["🚄延迟选优", "🌍地区选择","⚖️地区负载均衡","⚖️All负载均衡(散列)", "⚖️All负载均衡(轮询)","🚑故障转移","DIRECT"],
+      "proxies": ["🚄延迟选优", "🌍地区选择","🟢倍率选择","🔴剔除倍率选择","⚖️地区负载均衡","⚖️All负载均衡(散列)", "⚖️All负载均衡(轮询)","🚑故障转移","DIRECT"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
     },
     {
@@ -418,6 +419,24 @@ function main(config) {
       "proxies": ["🇧🇷巴西AUTO","🇨🇭瑞士AUTO","🇦🇺澳大利亚AUTO","🇨🇦加拿大AUTO","🇩🇪德国AUTO","🇬🇧英国AUTO","🇭🇰香港AUTO","🇯🇵日本AUTO",
       "🇸🇬新加坡AUTO","🇺🇸美国AUTO","🇹🇼台湾AUTO","👑专线(IEPL)AUTO","🇰🇷韩国AUTO","🇮🇳印度AUTO","🇷🇺俄罗斯AUTO"],
       "icon": "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/categoryglobe.png"
+    },
+    {
+      ...groupBaseOption,
+      "type": "select",
+      name: "🟢倍率选择",
+      hidden:false,
+      "include-all":true,
+      filter: "(?i)倍率|倍|×|✖|x|X|✕|⨉",
+      icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png"
+    },
+    {
+      ...groupBaseOption,
+      ...groupautoOption,
+      name: "🔴剔除倍率选择",
+      hidden:false,
+      "include-all":true,
+      "exclude-filter": "(?i)倍率|倍|×|✖|x|X|✕|⨉",
+      icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png"
     },
     {
       ...groupBaseOption,
