@@ -286,58 +286,35 @@ const ruleProviders = {
   },
 };
 // 规则
-const subrules = {
-  "📢 微信 FCM 方案1":[
-    // Google FCM
-    "GEOSITE, googlefcm, ✔️全局直连 ",// Google FCM 推送"
-    // 微信 - Google FCM
-    "AND,((OR,((AND,((DOMAIN-REGEX,^.*long.weixin.qq.com),(OR,((DST-PORT,80),(DST-PORT,8080),(DST-PORT,443))))),(AND,((DOMAIN-REGEX,^.*dns.weixin.qq.com.*))))),(NETWORK,TCP)), 🖥️节点选择 ",// 微信 Google FCM"
-    "AND,((NOT,((GEOIP,cn))),(NOT,((GEOSITE,cn))),(OR,((IP-ASN,45090),(IP-ASN,132203),(IP-ASN,133478)))), 🖥️节点选择 ",// 微信境外 ASN 请求。测试规则
-    "DOMAIN-REGEX, ^(?:(.*short)|(.+long)).weixin.qq.com, ✔️全局直连"],// 微信消息"
-  "📢 微信 FCM 方案2":[
-    // Google FCM
-    "GEOSITE, googlefcm, ✔️全局直连 ",// Google FCM 推送"
-    // 微信 - Google FCM
-    "AND,((OR,((AND,((DOMAIN-REGEX,^.*extshort.weixin.qq.com),(DST-PORT,80))),(AND,((DOMAIN-REGEX,^.*long.weixin.qq.com),(OR,((DST-PORT,80),(DST-PORT,8080),(DST-PORT,443))))),(AND,((DOMAIN-REGEX,^.*dns.weixin.qq.com.*))))),(NETWORK,TCP)), 🖥️节点选择 ",//微信 Google FCM
-    "AND,((NOT,((GEOIP,cn))),(NOT,((GEOSITE,cn))),(OR,((IP-ASN,45090),(IP-ASN,132203),(IP-ASN,133478)))), 🖥️节点选择 ",// 微信境外 ASN 请求。测试规则
-    "DOMAIN-REGEX, ^(?:(?!ext)(.*short)|(.+long)).weixin.qq.com, ✔️全局直连 "],// 微信消息"
-};
 const rules = [
-  //微信 FCM 相关
-  "SUB-RULE,(OR,((NETWORK,TCP),(NETWORK,UDP))),📢 微信 FCM 方案2",
-  // 防止 YouTube 等使用 QUIC 导致速度不佳, 禁用 443 端口 UDP 流量（不包括国内）
-  "AND,((DST-PORT,443),(NETWORK,UDP),(NOT,((GEOSITE,cn))),(NOT,((GEOIP,cn))),(NOT,((IP-ASN,45090))),(NOT,((IP-ASN,132203))),(NOT,((IP-ASN,133478))),(NOT,((IP-ASN,59054))),(NOT,((IP-ASN,59054))),(NOT,((IP-ASN,59053))),(NOT,((IP-ASN,59052))),(NOT,((IP-ASN,59051))),(NOT,((IP-ASN,59028))),(NOT,((IP-ASN,45104))),(NOT,((IP-ASN,45103))),(NOT,((IP-ASN,37963))),(NOT,((IP-CIDR,223.5.5.5/32))),(NOT,((IP-CIDR,1.12.12.12/32))),(NOT,((IP-CIDR,94.140.14.14/32)))),❌广告过滤",
-  // 阿里巴巴。淘宝、支付宝等
-  "OR,((GEOSITE,alibaba),(IP-ASN,59054),(IP-ASN,59054),(IP-ASN,59053),(IP-ASN,59052),(IP-ASN,59051),(IP-ASN,59028),(IP-ASN,45104),(IP-ASN,45103),(IP-ASN,37963)), ✔️全局直连",
-  //包名
-  "PROCESS-NAME,org.torproject.torbrowser,🖥️节点选择",
-  "PROCESS-NAME,com.cccbb.abc,🖥️节点选择",
-  "PROCESS-NAME,com.apkpure.aegon,🖥️节点选择",
+  "PROCESS-NAME,org.torproject.torbrowser,🖥️节点选择,no-resolve",
+  "PROCESS-NAME,com.cccbb.abc,🖥️节点选择,no-resolve",
+  "PROCESS-NAME,com.apkpure.aegon,🖥️节点选择,no-resolve",
   // 自定义规则
-  "DOMAIN,v2rayse.com,🖥️节点选择", // V2rayse节点工具
+  "DOMAIN,v2rayse.com,🖥️节点选择,no-resolve", // V2rayse节点工具
   // blackmatrix7 规则集
-  "RULE-SET,youtube,▶️YouTuBe",
-  "RULE-SET,openai,🤖ChatGPT",
-  "RULE-SET,tiktok,🎵TikTok",
-  "RULE-SET,netflix,🎥Netflix",
-  "RULE-SET,emby,🔊Emby",
-  "RULE-SET,github,📦GitHub",
-  "RULE-SET,twitch,🎮Twitch",
+  "RULE-SET,youtube,▶️YouTuBe,no-resolve",
+  "RULE-SET,openai,🤖ChatGPT,no-resolve",
+  "RULE-SET,tiktok,🎵TikTok,no-resolve",
+  "RULE-SET,netflix,🎥Netflix,no-resolve",
+  "RULE-SET,emby,🔊Emby,no-resolve",
+  "RULE-SET,github,📦GitHub,no-resolve",
+  "RULE-SET,twitch,🎮Twitch,no-resolve",
   // Loyalsoldier 规则集
-  "RULE-SET,applications,✔️全局直连",
-  "RULE-SET,private,✔️全局直连",
-  "RULE-SET,reject,❌广告过滤",
-  "RULE-SET,microsoft,☁️微软服务",
-  "RULE-SET,icloud,✔️全局直连",
-  "RULE-SET,apple-classical,🍎苹果服务",
-  "RULE-SET,apple-domain,🍎苹果服务",
-  "RULE-SET,apple-direct,✔️全局直连",
-  "RULE-SET,google-classical,🔍谷歌服务",
-  "RULE-SET,google-domain,🔍谷歌服务",
-  "RULE-SET,proxy,🖥️节点选择",
-  "RULE-SET,gfw,🖥️节点选择",
-  "RULE-SET,tld-not-cn,🖥️节点选择",
-  "RULE-SET,direct,✔️全局直连",
+  "RULE-SET,applications,✔️全局直连,no-resolve",
+  "RULE-SET,private,✔️全局直连,no-resolve",
+  "RULE-SET,reject,❌广告过滤,no-resolve",
+  "RULE-SET,microsoft,☁️微软服务,no-resolve",
+  "RULE-SET,icloud,✔️全局直连,no-resolve",
+  "RULE-SET,apple-classical,🍎苹果服务,no-resolve",
+  "RULE-SET,apple-domain,🍎苹果服务,no-resolve",
+  "RULE-SET,apple-direct,✔️全局直连,no-resolve",
+  "RULE-SET,google-classical,🔍谷歌服务,no-resolve",
+  "RULE-SET,google-domain,🔍谷歌服务,no-resolve",
+  "RULE-SET,proxy,🖥️节点选择,no-resolve",
+  "RULE-SET,gfw,🖥️节点选择,no-resolve",
+  "RULE-SET,tld-not-cn,🖥️节点选择,no-resolve",
+  "RULE-SET,direct,✔️全局直连,no-resolve",
   "RULE-SET,lancidr,✔️全局直连,no-resolve",
   "RULE-SET,cncidr,✔️全局直连,no-resolve",
   "RULE-SET,telegramcidr,📱电报消息,no-resolve",
@@ -397,9 +374,6 @@ function main(config) {
   config["geodata-mode"] = true;
   config["geo-auto-update"] = true;
   config["geo-update-interval"] = 24;
-  //config["tunnels"] = tunnelsConfig;
-  //config["listeners"] = listenersConfig;
-  config["sub-rules"] = subrules;
 
   // 覆盖原配置中的代理组
   config["proxy-groups"] = [
