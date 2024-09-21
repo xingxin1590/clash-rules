@@ -15,6 +15,7 @@ dns:
   enable: true
   listen: 0.0.0.0:1053
   use-system-hosts: true
+  prefer-h3: true
   use-hosts: true
   ipv6: true
   cache-algorithm: arc
@@ -646,35 +647,31 @@ proxy-groups:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/fish.svg
 rules:
-  - SUB-RULE,(OR,((NETWORK,TCP),(NETWORK,UDP))),📢 微信 FCM 方案2
-  - AND,((DST-PORT,443),(NETWORK,UDP),(NOT,((GEOSITE,cn))),(NOT,((GEOIP,cn))),(NOT,((IP-ASN,45090))),(NOT,((IP-ASN,132203))),(NOT,((IP-ASN,133478))),(NOT,((IP-ASN,59054))),(NOT,((IP-ASN,59054))),(NOT,((IP-ASN,59053))),(NOT,((IP-ASN,59052))),(NOT,((IP-ASN,59051))),(NOT,((IP-ASN,59028))),(NOT,((IP-ASN,45104))),(NOT,((IP-ASN,45103))),(NOT,((IP-ASN,37963))),(NOT,((IP-CIDR,223.5.5.5/32))),(NOT,((IP-CIDR,1.12.12.12/32))),(NOT,((IP-CIDR,94.140.14.14/32)))),❌广告过滤
-  - OR,((GEOSITE,alibaba),(IP-ASN,59054),(IP-ASN,59054),(IP-ASN,59053),(IP-ASN,59052),(IP-ASN,59051),(IP-ASN,59028),(IP-ASN,45104),(IP-ASN,45103),(IP-ASN,37963)),
-    ✔️全局直连
   - PROCESS-NAME,org.torproject.torbrowser,🖥️节点选择
   - PROCESS-NAME,com.cccbb.abc,🖥️节点选择
   - PROCESS-NAME,com.apkpure.aegon,🖥️节点选择
   - DOMAIN,v2rayse.com,🖥️节点选择
-  - RULE-SET,youtube,▶️YouTuBe
-  - RULE-SET,openai,🤖ChatGPT
-  - RULE-SET,tiktok,🎵TikTok
-  - RULE-SET,netflix,🎥Netflix
-  - RULE-SET,emby,🔊Emby
-  - RULE-SET,github,📦GitHub
-  - RULE-SET,twitch,🎮Twitch
-  - RULE-SET,applications,✔️全局直连
-  - RULE-SET,private,✔️全局直连
-  - RULE-SET,reject,❌广告过滤
-  - RULE-SET,microsoft,☁️微软服务
-  - RULE-SET,icloud,✔️全局直连
-  - RULE-SET,apple-classical,🍎苹果服务
-  - RULE-SET,apple-domain,🍎苹果服务
-  - RULE-SET,apple-direct,✔️全局直连
-  - RULE-SET,google-classical,🔍谷歌服务
-  - RULE-SET,google-domain,🔍谷歌服务
-  - RULE-SET,proxy,🖥️节点选择
-  - RULE-SET,gfw,🖥️节点选择
-  - RULE-SET,tld-not-cn,🖥️节点选择
-  - RULE-SET,direct,✔️全局直连
+  - RULE-SET,youtube,▶️YouTuBe,no-resolve
+  - RULE-SET,openai,🤖ChatGPT,no-resolve
+  - RULE-SET,tiktok,🎵TikTok,no-resolve
+  - RULE-SET,netflix,🎥Netflix,no-resolve
+  - RULE-SET,emby,🔊Emby,no-resolve
+  - RULE-SET,github,📦GitHub,no-resolve
+  - RULE-SET,twitch,🎮Twitch,no-resolve
+  - RULE-SET,applications,✔️全局直连,no-resolve
+  - RULE-SET,private,✔️全局直连,no-resolve
+  - RULE-SET,reject,❌广告过滤,no-resolve
+  - RULE-SET,microsoft,☁️微软服务,no-resolve
+  - RULE-SET,icloud,✔️全局直连,no-resolve
+  - RULE-SET,apple-classical,🍎苹果服务,no-resolve
+  - RULE-SET,apple-domain,🍎苹果服务,no-resolve
+  - RULE-SET,apple-direct,✔️全局直连,no-resolve
+  - RULE-SET,google-classical,🔍谷歌服务,no-resolve
+  - RULE-SET,google-domain,🔍谷歌服务,no-resolve
+  - RULE-SET,proxy,🖥️节点选择,no-resolve
+  - RULE-SET,gfw,🖥️节点选择,no-resolve
+  - RULE-SET,tld-not-cn,🖥️节点选择,no-resolve
+  - RULE-SET,direct,✔️全局直连,no-resolve
   - RULE-SET,lancidr,✔️全局直连,no-resolve
   - RULE-SET,cncidr,✔️全局直连,no-resolve
   - RULE-SET,telegramcidr,📱电报消息,no-resolve
@@ -716,24 +713,6 @@ tun:
 geodata-mode: true
 geo-auto-update: true
 geo-update-interval: 24
-sub-rules:
-  📢 微信 FCM 方案1:
-    - "GEOSITE, googlefcm, ✔️全局直连 "
-    - "AND,((OR,((AND,((DOMAIN-REGEX,^.*long.weixin.qq.com),(OR,((DST-PORT,80),\
-      (DST-PORT,8080),(DST-PORT,443))))),(AND,((DOMAIN-REGEX,^.*dns.weixin.qq.c\
-      om.*))))),(NETWORK,TCP)), 🖥️节点选择 "
-    - "AND,((NOT,((GEOIP,cn))),(NOT,((GEOSITE,cn))),(OR,((IP-ASN,45090),(IP-ASN\
-      ,132203),(IP-ASN,133478)))), 🖥️节点选择 "
-    - DOMAIN-REGEX, ^(?:(.*short)|(.+long)).weixin.qq.com, ✔️全局直连
-  📢 微信 FCM 方案2:
-    - "GEOSITE, googlefcm, ✔️全局直连 "
-    - "AND,((OR,((AND,((DOMAIN-REGEX,^.*extshort.weixin.qq.com),(DST-PORT,80)))\
-      ,(AND,((DOMAIN-REGEX,^.*long.weixin.qq.com),(OR,((DST-PORT,80),(DST-PORT,\
-      8080),(DST-PORT,443))))),(AND,((DOMAIN-REGEX,^.*dns.weixin.qq.com.*))))),\
-      (NETWORK,TCP)), 🖥️节点选择 "
-    - "AND,((NOT,((GEOIP,cn))),(NOT,((GEOSITE,cn))),(OR,((IP-ASN,45090),(IP-ASN\
-      ,132203),(IP-ASN,133478)))), 🖥️节点选择 "
-    - "DOMAIN-REGEX, ^(?:(?!ext)(.*short)|(.+long)).weixin.qq.com, ✔️全局直连 "
 rule-providers:
   fake-ip-filter:
     type: http
@@ -922,5 +901,12 @@ geox-url:
   geosite: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
   mmdb: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb
   asn: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb
+skip-auth-prefixes:
+  - 127.0.0.1/32
+authentication: []
+lan-allowed-ips:
+  - 0.0.0.0/0
+  - ::/0
+lan-disallowed-ips: []
 
 
