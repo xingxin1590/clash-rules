@@ -59,6 +59,7 @@ const dnsConfig = {
   "enable": true,
   "listen": "0.0.0.0:1053",
   "use-system-hosts": true,
+  "prefer-h3": true,
   "use-hosts": true,
   "ipv6": true,
   "cache-algorithm": "arc",
@@ -287,11 +288,11 @@ const ruleProviders = {
 };
 // 规则
 const rules = [
-  "PROCESS-NAME,org.torproject.torbrowser,🖥️节点选择,no-resolve",
-  "PROCESS-NAME,com.cccbb.abc,🖥️节点选择,no-resolve",
-  "PROCESS-NAME,com.apkpure.aegon,🖥️节点选择,no-resolve",
+  "PROCESS-NAME,org.torproject.torbrowser,🖥️节点选择",
+  "PROCESS-NAME,com.cccbb.abc,🖥️节点选择",
+  "PROCESS-NAME,com.apkpure.aegon,🖥️节点选择",
   // 自定义规则
-  "DOMAIN,v2rayse.com,🖥️节点选择,no-resolve", // V2rayse节点工具
+  "DOMAIN,v2rayse.com,🖥️节点选择", // V2rayse节点工具
   // blackmatrix7 规则集
   "RULE-SET,youtube,▶️YouTuBe,no-resolve",
   "RULE-SET,openai,🤖ChatGPT,no-resolve",
