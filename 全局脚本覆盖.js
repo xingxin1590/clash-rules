@@ -409,7 +409,6 @@ function main(config) {
       ...groupautoOption,
       name: "🔴剔除倍率选择",
       hidden:false,
-      "include-all":true,
       "exclude-filter": "(?i)倍率|倍|×|✖|x|X|✕|⨉",
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png"
     },
@@ -500,7 +499,7 @@ function main(config) {
       "url": "https://www.tiktok.com",
       "expected-status": "200",
       hidden:false,
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong",
+      filter: "(?i)台湾|🇹🇼|新加坡|Singapore|🇸🇬|日本|Japan|🇯🇵|韩国|🇰🇷|Korea",
       "icon": "https://www.clashverge.dev/assets/icons/tiktok.svg"
     },
     {
