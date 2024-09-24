@@ -407,6 +407,13 @@ function main(config) {
     {
       ...groupBaseOption,
       ...groupautoOption,
+      "name": "🚄延迟选优",
+      "hidden": false,
+      "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg"
+    },
+    {
+      ...groupBaseOption,
+      ...groupautoOption,
       name: "🔴剔除倍率选择",
       hidden:false,
       "exclude-filter": "(?i)倍率|倍|×|✖|x|X|✕|⨉",
@@ -414,17 +421,10 @@ function main(config) {
     },
     {
       ...groupBaseOption,
-      ...groupautoOption,
-      "name": "🚄延迟选优",
-      "hidden": false,
-      "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg"
-    },
-    {
-      ...groupBaseOption,
       "name": "⚖️地区负载均衡",
       "type": "select",
       "hidden": false,
-      "proxies": ["👑专线(IEPL)(散列)","👑专线(IEPL)(轮询)","🇭🇰香港(散列)","🇭🇰香港(轮询)"],
+      "proxies": ["👑专线(IEPL)(散列)","👑专线(IEPL)(轮询)","🇭🇰香港(散列)","🇭🇰香港(轮询)","🇸🇬新加坡(散列)","🇸🇬新加坡(轮询)"],
       "icon": "https://www.clashverge.dev/assets/icons/balance.svg"
     },
     {
@@ -499,7 +499,7 @@ function main(config) {
       "url": "https://www.tiktok.com",
       "expected-status": "200",
       hidden:false,
-      filter: "(?i)台湾|🇹🇼|新加坡|Singapore|🇸🇬|日本|Japan|🇯🇵|韩国|🇰🇷|Korea",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong",
       "icon": "https://www.clashverge.dev/assets/icons/tiktok.svg"
     },
     {
@@ -582,6 +582,26 @@ function main(config) {
     {
       ...groupBaseOption,
       ...groupautoOption,
+      name: "🇸🇬新加坡AUTO",
+      filter: "(?i)新加坡|Singapore|🇸🇬",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg"
+    },
+    {
+      ...groupBaseOption,
+      ...grouphashOption,
+      name: "🇸🇬新加坡(散列)",
+      filter: "(?i)新加坡|Singapore|🇸🇬",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },{
+      ...groupBaseOption,
+      ...grouprobinOption,
+      name: "🇸🇬新加坡(轮询)",
+      filter: "(?i)新加坡|Singapore|🇸🇬",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+    },
+    {
+      ...groupBaseOption,
+      ...groupautoOption,
       name: "🇷🇺俄罗斯AUTO",  
       filter: "(?i)俄罗斯|🇷🇺",
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
@@ -634,13 +654,6 @@ function main(config) {
       name: "🇮🇳印度AUTO",
       filter: "(?i)印度|🇮🇳",
       icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
-    },
-    {
-      ...groupBaseOption,
-      ...groupautoOption,
-      name: "🇸🇬新加坡AUTO",
-      filter: "(?i)新加坡|Singapore|🇸🇬",
-      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg"
     },
     {
       ...groupBaseOption,
