@@ -1,4 +1,4 @@
-#此处填写你的机场订阅链接
+#此处填写你的机场订阅链接,需要多个订阅，直接复制粘贴proxy-provider即可
 proxy-providers:
   机场名称: 
     type: http
