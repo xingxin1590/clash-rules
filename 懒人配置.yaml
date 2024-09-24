@@ -5,7 +5,6 @@ proxy-providers:
     interval: 21600
     url: "机场链接"
     
-mixed-port: 7890
 allow-lan: true
 bind-address: "*"
 mode: rule
@@ -183,9 +182,8 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 1
-    name: 🔴剔除倍率选择
-    exclude-filter: (?i)倍率|倍|×|✖|x|X|✕|⨉
-    icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png
+    name: 🚄延迟选优
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg
   - interval: 60
     timeout: 3000
     lazy: false
@@ -195,8 +193,9 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 1
-    name: 🚄延迟选优
-    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg
+    name: 🔴剔除倍率选择
+    exclude-filter: (?i)倍率|倍|×|✖|x|X|✕|⨉
+    icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png
   - interval: 60
     timeout: 3000
     lazy: false
@@ -210,6 +209,8 @@ proxy-groups:
       - 👑专线(IEPL)(轮询)
       - 🇭🇰香港(散列)
       - 🇭🇰香港(轮询)
+      - 🇸🇬新加坡(散列)
+      - 🇸🇬新加坡(轮询)
     icon: https://www.clashverge.dev/assets/icons/balance.svg
   - interval: 60
     timeout: 3000
@@ -466,6 +467,44 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 1
+    name: 🇸🇬新加坡AUTO
+    filter: (?i)新加坡|Singapore|🇸🇬
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg
+  - interval: 60
+    timeout: 3000
+    lazy: false
+    hidden: true
+    url: https://www.google.com/generate_204
+    max-failed-times: 3
+    type: load-balance
+    strategy: consistent-hashing
+    include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
+    name: 🇸🇬新加坡(散列)
+    filter: (?i)新加坡|Singapore|🇸🇬
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
+  - interval: 60
+    timeout: 3000
+    lazy: false
+    hidden: true
+    url: https://www.google.com/generate_204
+    max-failed-times: 3
+    type: load-balance
+    strategy: round-robin
+    include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
+    name: 🇸🇬新加坡(轮询)
+    filter: (?i)新加坡|Singapore|🇸🇬
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
+  - interval: 60
+    timeout: 3000
+    lazy: false
+    hidden: true
+    url: https://www.google.com/generate_204
+    max-failed-times: 3
+    type: url-test
+    include-all: true
+    tolerance: 1
     name: 🇷🇺俄罗斯AUTO
     filter: (?i)俄罗斯|🇷🇺
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
@@ -553,18 +592,6 @@ proxy-groups:
     name: 🇮🇳印度AUTO
     filter: (?i)印度|🇮🇳
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 60
-    timeout: 3000
-    lazy: false
-    hidden: true
-    url: https://www.google.com/generate_204
-    max-failed-times: 3
-    type: url-test
-    include-all: true
-    tolerance: 1
-    name: 🇸🇬新加坡AUTO
-    filter: (?i)新加坡|Singapore|🇸🇬
-    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg
   - interval: 60
     timeout: 3000
     lazy: false
@@ -707,8 +734,8 @@ tun:
     - tcp://any:53
   auto-route: true
   auto-detect-interface: true
+  auto-redirect: true
   mtu: 9000
-  auto-redirect: false
   strict-route: true
 geodata-mode: true
 geo-auto-update: true
