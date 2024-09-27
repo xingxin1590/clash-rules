@@ -330,10 +330,10 @@ const rules = [
 const groupBaseOption = {
   "interval": 120,
   "timeout": 3000,
-  "lazy": true,
+  "lazy": false,
   "hidden":true,
   "url": "http://www.google-analytics.com/generate_204",
-  "max-failed-times": 5,
+  "max-failed-times": 3,
 };
 // 散列负载均衡通用配置
 const grouphashOption = {
