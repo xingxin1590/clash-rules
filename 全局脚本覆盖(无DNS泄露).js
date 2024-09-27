@@ -384,7 +384,7 @@ function main(config) {
       "name": "🖥️节点选择",
       "type": "select",
       "hidden": false,
-      "proxies": ["🚄延迟选优", "🌍地区选择","🟢倍率选择","🔴剔除倍率选择","⚖️地区负载均衡","⚖️All负载均衡(散列)", "⚖️All负载均衡(轮询)","🚑故障转移","DIRECT"],
+      "proxies": ["🚄延迟选优", "🌍地区选择","🟢低倍率选择","🔴高倍率选择","🟡剔除倍率选择","⚖️地区负载均衡","⚖️All负载均衡(散列)", "⚖️All负载均衡(轮询)","🚑故障转移","DIRECT"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
     },
     {
@@ -399,10 +399,21 @@ function main(config) {
     {
       ...groupBaseOption,
       "type": "select",
-      name: "🟢倍率选择",
+      name: "🟢低倍率选择",
       hidden:false,
       "include-all":true,
       filter: "(?i)倍率|倍|×|✖|x|X|✕|⨉",
+      "exclude-filter": "(?i)倍率:\s*([2-9]\d*|[1-9]\d{1,})|倍率:1.",
+      icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png"
+    },
+    {
+      ...groupBaseOption,
+      "type": "select",
+      name: "🔴高倍率选择",
+      hidden:false,
+      "include-all":true,
+      filter: "(?i)倍率|倍|×|✖|x|X|✕|⨉",
+      "exclude-filter": "(?i)倍率:1|1倍|1.0倍|倍率:1.0|倍率:0",
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png"
     },
     {
@@ -415,9 +426,9 @@ function main(config) {
     {
       ...groupBaseOption,
       ...groupautoOption,
-      name: "🔴剔除倍率选择",
+      name: "🟡剔除倍率选择",
       hidden:false,
-      "exclude-filter": "(?i)倍率|倍|×|✖|x|X|✕|⨉",
+      "exclude-filter": "(?i)倍率:\s*([2-9]\d*|[1-9]\d{1,})|倍率:1.|倍率:0",
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png"
     },
     {
