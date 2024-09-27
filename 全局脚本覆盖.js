@@ -288,6 +288,7 @@ const ruleProviders = {
 };
 // 规则
 const rules = [
+  "PROCESS-NAME,NAI_CasRand.exe,🖥️节点选择",
   "PROCESS-NAME,org.torproject.torbrowser,🖥️节点选择",
   "PROCESS-NAME,com.cccbb.abc,🖥️节点选择",
   "PROCESS-NAME,com.apkpure.aegon,🖥️节点选择",
