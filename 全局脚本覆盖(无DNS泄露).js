@@ -328,7 +328,7 @@ const rules = [
 ];
 // 代理组通用配置
 const groupBaseOption = {
-  "interval": 60,
+  "interval": 120,
   "timeout": 3000,
   "lazy": false,
   "hidden":true,
@@ -353,7 +353,7 @@ const grouprobinOption = {
 const groupautoOption = {
   "type": "url-test",
   "include-all": true,
-  "tolerance": 1,
+  "tolerance": 50,
 };
 
 // 程序入口
