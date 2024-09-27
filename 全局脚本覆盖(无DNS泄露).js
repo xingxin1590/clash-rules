@@ -428,7 +428,7 @@ function main(config) {
       ...groupautoOption,
       name: "🟡剔除倍率选择",
       hidden:false,
-      "exclude-filter": "(?i)倍率:\s*([2-9]\d*|[1-9]\d{1,})|倍率:1.|倍率:0",
+      "exclude-filter": "(?i)倍率:\s*([2-9]\d*)|倍率:1.|倍率:0",
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png"
     },
     {
