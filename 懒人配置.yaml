@@ -132,7 +132,7 @@ proxy-groups:
       - 🌍地区选择
       - 🟢低倍率选择
       - 🔴高倍率选择
-      - 🟡剔除倍率选择
+      - 🟡1倍率选择
       - ⚖️地区负载均衡
       - ⚖️All负载均衡(散列)
       - ⚖️All负载均衡(轮询)
@@ -174,7 +174,7 @@ proxy-groups:
     name: 🟢低倍率选择
     include-all: true
     filter: (?i)倍率|倍|×|✖|x|X|✕|⨉
-    exclude-filter: (?i)倍率:s*([2-9]d*|[1-9]d{1,})|倍率:1.
+    exclude-filter: (?i)(倍率:\s*([2-9]\d*|[1-9]\d{1,}))|倍率:1|([×✖xX✕⨉]\s*(1(?:\.0+)?|[1-9]\d*(?:\.\d+)?))
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png
   - interval: 120
     timeout: 3000
@@ -185,8 +185,8 @@ proxy-groups:
     type: select
     name: 🔴高倍率选择
     include-all: true
-    filter: (?i)倍率|倍|×|✖|x|X|✕|⨉|倍率:1.7
-    exclude-filter: (?i)倍率:1|1倍|1.0倍|倍率:1.0|倍率:0|0.
+    filter: (?i)倍率|倍|×|✖|x|X|✕|⨉
+    exclude-filter: (?i)倍率:\s*1(?!\.\d+)|1倍|1.0倍|倍率:0|0.
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png
   - interval: 120
     timeout: 3000
@@ -208,8 +208,8 @@ proxy-groups:
     type: url-test
     include-all: true
     tolerance: 50
-    name: 🟡剔除倍率选择
-    exclude-filter: (?i)倍率:s*([2-9]d*)|倍率:0|×|✖|x|X|✕|⨉
+    name: 🟡1倍率选择
+    exclude-filter: (?i)(倍率:\s*(?!1$)\d+\.\d+)|((?:×|✖|x|X|✕|⨉)\s*(?!1(?:\.0+)?$)(\d+(?:\.\d+)?))|((?!1(?:\.0+)?$)(\d+(?:\.\d+)?)\s*(?:×|✖|x|X|✕|⨉))
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png
   - interval: 120
     timeout: 3000
@@ -951,5 +951,6 @@ lan-allowed-ips:
   - 0.0.0.0/0
   - ::/0
 lan-disallowed-ips: []
+
 
 
