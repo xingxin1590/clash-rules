@@ -234,7 +234,7 @@ const ruleProviders = {
   "applications": {
     ...ruleProviderCommon,
     "behavior": "classical",
-    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/applications.txt",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/applications.yaml",
     "path": "./ruleset/loyalsoldier/applications.yaml"
   },
   "openai": {
