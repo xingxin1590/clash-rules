@@ -1,4 +1,5 @@
 payload:
+  - PROCESS-NAME,com.skyjos.apps.fileexplorerfree
   - PROCESS-NAME,com.tencent.jkchess
   - IP-CIDR, 43.130.194.0/23,no-resolve # 微信
   - IP-CIDR, 43.156.192.0/18,no-resolve # 微信
