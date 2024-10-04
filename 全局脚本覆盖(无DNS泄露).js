@@ -234,7 +234,7 @@ const ruleProviders = {
   "applications": {
     ...ruleProviderCommon,
     "behavior": "classical",
-    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/applications.yaml",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@refs/heads/main/applications.yaml",
     "path": "./ruleset/loyalsoldier/applications.yaml"
   },
   "openai": {
@@ -270,7 +270,7 @@ const ruleProviders = {
   "microsoft": {
     ...ruleProviderCommon,
     "behavior": "classical",
-    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@main/Microsoft.txt",
+    "url": "https://fastly.jsdelivr.net/gh/xingxin1590/clash-rules@refs/heads/main/Microsoft.yaml",
     "path": "./ruleset/blackmatrix7/Microsoft.yaml"
   },
   "twitch": {
@@ -306,7 +306,7 @@ const rules = [
   "RULE-SET,applications,✔️全局直连,no-resolve",
   "RULE-SET,private,✔️全局直连,no-resolve",
   "RULE-SET,reject,❌广告过滤,no-resolve",
-  "RULE-SET,microsoft,☁️微软服务,no-resolve",
+  //"RULE-SET,microsoft,☁️微软服务,no-resolve",
   "RULE-SET,icloud,✔️全局直连,no-resolve",
   "RULE-SET,apple-classical,🍎苹果服务,no-resolve",
   "RULE-SET,apple-domain,🍎苹果服务,no-resolve",
@@ -428,7 +428,7 @@ function main(config) {
       ...groupautoOption,
       name: "🟡1倍率选择",
       hidden:false,
-      "exclude-filter": '(?i)(倍率:\\s*(?!1$)\\d+\\.\\d+)|((?:×|✖|x|X|✕|⨉)\\s*(?!1(?:\\.0+)?$)(\\d+(?:\\.\\d+)?))',
+      "exclude-filter": '(?i)(倍率:\\s*(?!1$)\\d+\\.\\d+)|((?:×|✖|x|X|✕|⨉)\\s*(?!1(?:\\.0+)?$)(\\d+(?:\\.\\d+)?))|((?!1(?:\\.0+)?$)(\\d+(?:\\.\\d+)?)\\s*(?:×|✖|x|X|✕|⨉))',
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png"
     },
     {
@@ -535,13 +535,13 @@ function main(config) {
       "proxies": ["🖥️节点选择"],
       "icon": "https://www.clashverge.dev/assets/icons/youtube.svg"
     },
-    {
+    /*{
       ...groupBaseOption,
       "name": "☁️微软服务",
       "type": "select",       
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/microsoft.svg"
-    },
+    },*/
     {
       ...groupBaseOption,
       "name": "🍎苹果服务",
