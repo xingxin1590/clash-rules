@@ -1,5 +1,4 @@
 payload:
-  - PROCESS-NAME,svchost.exe
   - PROCESS-NAME,WinStore.App.exe
   - PROCESS-NAME,com.skyjos.apps.fileexplorerfree
   - PROCESS-NAME,com.tencent.jkchess
