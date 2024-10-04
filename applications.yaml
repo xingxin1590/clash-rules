@@ -1,6 +1,5 @@
 payload:
   - PROCESS-NAME,Photoshop.exe
-  - PROCESS-NAME,WinStore.App.exe
   - PROCESS-NAME,com.skyjos.apps.fileexplorerfree
   - PROCESS-NAME,com.tencent.jkchess
   - IP-CIDR,43.130.194.0/23
