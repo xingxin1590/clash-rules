@@ -402,8 +402,7 @@ function main(config) {
       name: "🟢低倍率选择",
       hidden:false,
       "include-all":true,
-      filter: "(?i)倍率|倍|×|✖|x|X|✕|⨉",
-      "exclude-filter": '(?i)(倍率:\\s*([2-9]\\d*|[1-9]\\d{1,}))|倍率:1|([×✖xX✕⨉]\\s*(1(?:\\.0+)?|[1-9]\\d*(?:\\.\\d+)?))',
+      filter: "(?i)0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+",
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png"
     },
     {
@@ -413,7 +412,7 @@ function main(config) {
       hidden:false,
       "include-all":true,
       filter: "(?i)倍率|倍|×|✖|x|X|✕|⨉",
-      "exclude-filter": '(?i)倍率:\\s*1(?!\\.\\d+)|1倍|1.0倍|倍率:0|0\.',
+      "exclude-filter": '(?i)倍率:\\s*1(?!\\.\\d+)|0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+',
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png"
     },
     {
