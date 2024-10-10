@@ -402,7 +402,7 @@ function main(config) {
       name: "🟢低倍率选择",
       hidden:false,
       "include-all":true,
-      filter: "(?i)0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+",
+      filter: "(?i)0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+|0(?:×|✖|x|X|✕|⨉)",
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png"
     },
     {
@@ -412,7 +412,7 @@ function main(config) {
       hidden:false,
       "include-all":true,
       filter: "(?i)倍率|倍|×|✖|x|X|✕|⨉",
-      "exclude-filter": '(?i)倍率:\\s*1(?!\\.\\d+)|0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+',
+      "exclude-filter": '(?i)倍率:\\s*1(?!\\.\\d+)|0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+|1(?:×|✖|x|X|✕|⨉)|0(?:×|✖|x|X|✕|⨉)',
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png"
     },
     {
@@ -427,7 +427,7 @@ function main(config) {
       ...groupautoOption,
       name: "🟡1倍率选择",
       hidden:false,
-      "exclude-filter": '(?i)(倍率:\\s*(?!1$)\\d+\\.\\d+)|((?:×|✖|x|X|✕|⨉)\\s*(?!1(?:\\.0+)?$)(\\d+(?:\\.\\d+)?))|((?!1(?:\\.0+)?$)(\\d+(?:\\.\\d+)?)\\s*(?:×|✖|x|X|✕|⨉))',
+      "exclude-filter": '(?i)0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+',
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png"
     },
     {
