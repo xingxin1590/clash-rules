@@ -119,11 +119,11 @@ dns:
       - "[2402:4e00::]"
 
 proxy-groups:
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: false
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 🖥️节点选择
     type: select
@@ -139,11 +139,11 @@ proxy-groups:
       - 🚑故障转移
       - DIRECT
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: false
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 🌍地区选择
     type: select
@@ -164,57 +164,69 @@ proxy-groups:
       - 🇮🇳印度AUTO
       - 🇷🇺俄罗斯AUTO
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/categoryglobe.png
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: false
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: select
     name: 🟢低倍率选择
     include-all: true
-    filter: (?i)0.[0-9]+(?:×|✖|x|X|✕|⨉)|0.[0-9]+倍率|倍率:0.[0-9]+
+    filter: (?i)0.[0-9]+(?:×|✖|x|X|✕|⨉)|0.[0-9]+倍率|倍率:0.[0-9]+|0(?:×|✖|x|X|✕|⨉)
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: false
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: select
     name: 🔴高倍率选择
     include-all: true
-    filter: (?i)倍率|倍|×|✖|x|X|✕|⨉
-    exclude-filter: (?i)倍率:\s*1(?!\.\d+)|0.[0-9]+(?:×|✖|x|X|✕|⨉)|0.[0-9]+倍率|倍率:0.[0-9]+
+    filter: (?i)倍率|倍|[0-9]+(?:×|✖|x|X|✕|⨉)
+    exclude-filter: (?i)倍率:\s*1(?!\.\d+)|(0.[0-9]+(?:×|✖|x|X|✕|⨉))|(0.[0-9]+倍率)|(倍率:0.[0-9]+)|1(?:×|✖|x|X|✕|⨉)|0(?:×|✖|x|X|✕|⨉)
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: false
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🚄延迟选优
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: false
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)0.[0-9]+(?:×|✖|x|X|✕|⨉)|0.[0-9]+倍率|倍率:0.[0-9]+|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群
     tolerance: 50
     name: 🟡1倍率选择
-    exclude-filter: (?i)(倍率:\s*(?!1$)\d+\.\d+)|((?:×|✖|x|X|✕|⨉)\s*(?!1(?:\.0+)?$)(\d+(?:\.\d+)?))|((?!1(?:\.0+)?$)(\d+(?:\.\d+)?)\s*(?:×|✖|x|X|✕|⨉))
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: false
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
+    max-failed-times: 3
+    type: select
+    name: 📢官网订阅消息
+    include-all: true
+    filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    icon: https://files.oaiusercontent.com/file-uN5M9SJ9NTWCZ8obRfaogvyq?se=2024-10-15T06%3A41%3A46Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D41e8c60d-c78f-4b1c-a498-7d6f1beb61a9.webp&sig=97KmnzUPmlSiUo0L1e6FauwSKJyuofl%2BHc6XPtA%2BqWA%3D
+  - interval: 300
+    timeout: 5000
+    lazy: false
+    hidden: false
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: ⚖️地区负载均衡
     type: select
@@ -226,450 +238,465 @@ proxy-groups:
       - 🇸🇬新加坡(散列)
       - 🇸🇬新加坡(轮询)
     icon: https://www.clashverge.dev/assets/icons/balance.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: load-balance
     strategy: consistent-hashing
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     name: ⚖️All负载均衡(散列)
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/merry_go.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: load-balance
     strategy: round-robin
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     name: ⚖️All负载均衡(轮询)
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/balance.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: false
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 🚑故障转移
     type: fallback
     include-all: true
     icon: https://www.clashverge.dev/assets/icons/ambulance.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 🔍谷歌服务
     type: select
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 📦GitHub
     type: select
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 🎮Twitch
     type: select
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 📁icloud云存储
     type: select
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 📱电报消息
     type: select
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/telegram.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: false
     url: https://chatgpt.com
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong
     tolerance: 50
     name: 🤖ChatGPT
     expected-status: "200"
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: false
     url: https://www.tiktok.com
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong
     tolerance: 50
     name: 🎵TikTok
     expected-status: "200"
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong
     icon: https://www.clashverge.dev/assets/icons/tiktok.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 🎥Netflix
     type: select
     proxies:
       - 🖥️节点选择
     icon: https://www.clashverge.dev/assets/icons/netflix.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 🔊Emby
     type: select
     proxies:
       - 🖥️节点选择
     icon: https://www.clashverge.dev/assets/icons/netflix.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: ▶️YouTuBe
     type: select
     proxies:
       - 🖥️节点选择
     icon: https://www.clashverge.dev/assets/icons/youtube.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: 🍎苹果服务
     type: select
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 👑专线(IEPL)AUTO
     filter: (?i)专线|IEPL|👑|专转
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: load-balance
     strategy: consistent-hashing
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     name: 👑专线(IEPL)(散列)
     filter: (?i)专线|IEPL|👑|专转
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: load-balance
     strategy: round-robin
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     name: 👑专线(IEPL)(轮询)
     filter: (?i)专线|IEPL|👑|专转
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇭🇰香港AUTO
     filter: (?i)香港|Hong Kong|🇭🇰
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: load-balance
     strategy: consistent-hashing
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     name: 🇭🇰香港(散列)
     filter: (?i)香港|Hong Kong|🇭🇰
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: load-balance
     strategy: round-robin
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     name: 🇭🇰香港(轮询)
     filter: (?i)香港|Hong Kong|🇭🇰
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇸🇬新加坡AUTO
     filter: (?i)新加坡|Singapore|🇸🇬
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: load-balance
     strategy: consistent-hashing
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     name: 🇸🇬新加坡(散列)
     filter: (?i)新加坡|Singapore|🇸🇬
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: load-balance
     strategy: round-robin
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     name: 🇸🇬新加坡(轮询)
     filter: (?i)新加坡|Singapore|🇸🇬
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇷🇺俄罗斯AUTO
     filter: (?i)俄罗斯|🇷🇺
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇧🇷巴西AUTO
     filter: (?i)巴西|🇧🇷
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇨🇭瑞士AUTO
     filter: (?i)瑞士|🇨🇭
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇦🇺澳大利亚AUTO
     filter: (?i)澳大利亚|🇦🇺
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇨🇦加拿大AUTO
     filter: (?i)加拿大|🇨🇦
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇩🇪德国AUTO
     filter: (?i)德国|🇩🇪|Germany
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇬🇧英国AUTO
     filter: (?i)英国|🇬🇧
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇮🇳印度AUTO
     filter: (?i)印度|🇮🇳
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇯🇵日本AUTO
     filter: (?i)日本|Japan|🇯🇵
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/jp.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇺🇸美国AUTO
     filter: (?i)美国|🇺🇸
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇹🇼台湾AUTO
     filter: (?i)台湾|🇹🇼
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     type: url-test
     include-all: true
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
     tolerance: 50
     name: 🇰🇷韩国AUTO
     filter: (?i)韩国|🇰🇷|Korea
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: ❌广告过滤
     type: select
     proxies:
       - REJECT
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/bug.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: ✔️全局直连
     type: select
     proxies:
       - DIRECT
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg
-  - interval: 120
-    timeout: 3000
+  - interval: 300
+    timeout: 5000
     lazy: false
     hidden: true
-    url: http://www.google-analytics.com/generate_204
+    url: https://www.gstatic.com/generate_204
     max-failed-times: 3
     name: ❗Final
     type: select
@@ -738,6 +765,7 @@ tun:
   auto-route: true
   auto-detect-interface: true
   mtu: 9000
+  device: Mihomo
   auto-redirect: false
   strict-route: true
 geodata-mode: true
@@ -938,6 +966,7 @@ lan-allowed-ips:
   - 0.0.0.0/0
   - ::/0
 lan-disallowed-ips: []
+
 
 
 
