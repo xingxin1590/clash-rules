@@ -340,20 +340,20 @@ const grouphashOption = {
   "type": "load-balance",
   "strategy": "consistent-hashing",
   "include-all": true,
-  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群",
+  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请",
 };
 // 轮询负载均衡通用配置
 const grouprobinOption = {
   "type": "load-balance",
   "strategy": "round-robin",
   "include-all": true,
-  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群",
+  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请",
 };
 // 自动选择通用配置
 const groupautoOption = {
   "type": "url-test",
   "include-all": true,
-  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群",
+  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请",
   "tolerance": 50,
 };
 
@@ -412,8 +412,8 @@ function main(config) {
       name: "🔴高倍率选择",
       hidden:false,
       "include-all":true,
-      filter: "(?i)倍率|倍|×|✖|x|X|✕|⨉",
-      "exclude-filter": '(?i)倍率:\\s*1(?!\\.\\d+)|0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+|1(?:×|✖|x|X|✕|⨉)|0(?:×|✖|x|X|✕|⨉)',
+      filter: "(?i)倍率|倍|[0-9]+(?:×|✖|x|X|✕|⨉)",
+      "exclude-filter": '(?i)倍率:\\s*1(?!\\.\\d+)|(0\.[0-9]+(?:×|✖|x|X|✕|⨉))|(0\.[0-9]+倍率)|(倍率:0\.[0-9]+)|1(?:×|✖|x|X|✕|⨉)|0(?:×|✖|x|X|✕|⨉)',
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png"
     },
     {
@@ -437,7 +437,7 @@ function main(config) {
       name: "📢官网订阅消息",
       hidden:false,
       "include-all":true,
-      filter: "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群",
+      filter: "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请",
       icon: "https://files.oaiusercontent.com/file-uN5M9SJ9NTWCZ8obRfaogvyq?se=2024-10-15T06%3A41%3A46Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D41e8c60d-c78f-4b1c-a498-7d6f1beb61a9.webp&sig=97KmnzUPmlSiUo0L1e6FauwSKJyuofl%2BHc6XPtA%2BqWA%3D"
     },
     {
