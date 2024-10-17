@@ -306,7 +306,7 @@ const rules = [
   "RULE-SET,applications,✔️全局直连,no-resolve",
   "RULE-SET,private,✔️全局直连,no-resolve",
   "RULE-SET,reject,❌广告过滤,no-resolve",
-  //"RULE-SET,microsoft,☁️微软服务,no-resolve",
+  "RULE-SET,microsoft,☁️微软服务,no-resolve",
   "RULE-SET,icloud,✔️全局直连,no-resolve",
   "RULE-SET,apple-classical,🍎苹果服务,no-resolve",
   "RULE-SET,apple-domain,🍎苹果服务,no-resolve",
@@ -428,8 +428,16 @@ function main(config) {
       ...groupautoOption,
       name: "🟡1倍率选择",
       hidden:false,
-      "exclude-filter": '(?i)0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群',
+      "exclude-filter": '(?i)0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|PL-s7|1065510303',
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png"
+    },
+    {
+      ...groupBaseOption,
+      ...groupautoOption,
+      "name": "🔗链式代理",
+      "hidden": false,
+      "exclude-filter":'PL-s7|1065510303|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|hax',
+      "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg"
     },
     {
       ...groupBaseOption,
@@ -510,7 +518,7 @@ function main(config) {
       "url": "https://chatgpt.com",
       "expected-status": "200",
       hidden:false,
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|TG群|邀请|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong|PL-s7|1065510303",
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg"
     },
     {
@@ -520,7 +528,7 @@ function main(config) {
       "url": "https://www.tiktok.com",
       "expected-status": "200",
       hidden:false,
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|TG群|邀请|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong|PL-s7|1065510303",
       "icon": "https://www.clashverge.dev/assets/icons/tiktok.svg"
     },
     {
@@ -544,13 +552,13 @@ function main(config) {
       "proxies": ["🖥️节点选择"],
       "icon": "https://www.clashverge.dev/assets/icons/youtube.svg"
     },
-    /*{
+    {
       ...groupBaseOption,
       "name": "☁️微软服务",
       "type": "select",       
       "proxies": ["🖥️节点选择"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/microsoft.svg"
-    },*/
+    },
     {
       ...groupBaseOption,
       "name": "🍎苹果服务",
