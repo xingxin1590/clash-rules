@@ -1,4 +1,5 @@
 payload:
+  - PROCESS-NAME,com.kmxs.reader
   - PROCESS-NAME,Photoshop.exe
   - PROCESS-NAME,com.skyjos.apps.fileexplorerfree
   - PROCESS-NAME,com.tencent.jkchess
