@@ -3,16 +3,10 @@ const domesticNameservers = [
   "https://dns.alidns.com/dns-query", // 阿里云公共DNS
   "https://doh.pub/dns-query", // 腾讯DNSPod
   "https://doh.360.cn/dns-query", // 360安全DNS
-  "https://116.169.2.207/dns-query",//中国四川联通DNS
 ];
 // 国外DNS服务器
 const foreignNameservers = [
-  "https://1.1.1.1/dns-query", // Cloudflare(主)
-  "https://1.0.0.1/dns-query", // Cloudflare(备)
-  "https://208.67.222.222/dns-query", // OpenDNS(主)
-  "https://208.67.220.220/dns-query", // OpenDNS(备)
-  "https://194.242.2.2/dns-query", // Mullvad(主)
-  "https://194.242.2.3/dns-query", // Mullvad(备)
+  "https://doh.apad.pro/dns-query"
 ];
 
 const profileConfig = {
@@ -120,7 +114,8 @@ const dnsConfig = {
   "default-nameserver": ["223.5.5.5", "223.6.6.6", "1.12.12.12", "120.53.53.53"],
   "fallback": ["tls://8.8.4.4","tls://1.1.1.1"],
   "nameserver": [...domesticNameservers, ...foreignNameservers],
-  "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
+  "direct-nameserver":["system"],
+  "proxy-server-nameserver": [...foreignNameservers],
   "nameserver-policy": {
     "geosite:private,cn,geolocation-cn": domesticNameservers,
     "geosite:google,youtube,telegram,gfw,microsoft,openai,tiktok,github,geolocation-!cn": foreignNameservers,
@@ -328,7 +323,7 @@ const rules = [
 ];
 // 代理组通用配置
 const groupBaseOption = {
-  "interval": 300,
+  "interval": 180,
   "timeout": 5000,
   "lazy": false,
   "hidden":true,
@@ -340,20 +335,20 @@ const grouphashOption = {
   "type": "load-balance",
   "strategy": "consistent-hashing",
   "include-all": true,
-  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请",
+  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit",
 };
 // 轮询负载均衡通用配置
 const grouprobinOption = {
   "type": "load-balance",
   "strategy": "round-robin",
   "include-all": true,
-  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请",
+  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit",
 };
 // 自动选择通用配置
 const groupautoOption = {
   "type": "url-test",
   "include-all": true,
-  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请",
+  "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit",
   "tolerance": 50,
 };
 
@@ -428,7 +423,7 @@ function main(config) {
       ...groupautoOption,
       name: "🟡1倍率选择",
       hidden:false,
-      "exclude-filter": '(?i)0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|PL-s7|1065510303',
+      "exclude-filter": '(?i)0\.[0-9]+(?:×|✖|x|X|✕|⨉)|0\.[0-9]+倍率|倍率:0\.[0-9]+|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|PL-s7|cf',
       icon: "https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png"
     },
     {
@@ -436,7 +431,7 @@ function main(config) {
       ...groupautoOption,
       "name": "🔗链式代理",
       "hidden": false,
-      "exclude-filter":'PL-s7|1065510303|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|hax',
+      "exclude-filter":'PL-s7|cf|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|hax|goflybit',
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg"
     },
     {
@@ -445,7 +440,7 @@ function main(config) {
       name: "📢官网订阅消息",
       hidden:false,
       "include-all":true,
-      filter: "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请",
+      filter: "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit",
       icon: "https://files.oaiusercontent.com/file-uN5M9SJ9NTWCZ8obRfaogvyq?se=2024-10-15T06%3A41%3A46Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D41e8c60d-c78f-4b1c-a498-7d6f1beb61a9.webp&sig=97KmnzUPmlSiUo0L1e6FauwSKJyuofl%2BHc6XPtA%2BqWA%3D"
     },
     {
@@ -518,7 +513,7 @@ function main(config) {
       "url": "https://chatgpt.com",
       "expected-status": "200",
       hidden:false,
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|TG群|邀请|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong|PL-s7|1065510303",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|TG群|邀请|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong|goflybit",
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg"
     },
     {
@@ -528,7 +523,7 @@ function main(config) {
       "url": "https://www.tiktok.com",
       "expected-status": "200",
       hidden:false,
-      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|TG群|邀请|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong|PL-s7|1065510303",
+      "exclude-filter": "(?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|TG群|邀请|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong|goflybit",
       "icon": "https://www.clashverge.dev/assets/icons/tiktok.svg"
     },
     {
