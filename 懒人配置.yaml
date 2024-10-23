@@ -80,37 +80,18 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
     - https://doh.360.cn/dns-query
-    - https://116.169.2.207/dns-query
-    - https://1.1.1.1/dns-query
-    - https://1.0.0.1/dns-query
-    - https://208.67.222.222/dns-query
-    - https://208.67.220.220/dns-query
-    - https://194.242.2.2/dns-query
-    - https://194.242.2.3/dns-query
+    - https://doh.apad.pro/dns-query
+  direct-nameserver:
+    - system
   proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-    - https://doh.360.cn/dns-query
-    - https://116.169.2.207/dns-query
-    - https://1.1.1.1/dns-query
-    - https://1.0.0.1/dns-query
-    - https://208.67.222.222/dns-query
-    - https://208.67.220.220/dns-query
-    - https://194.242.2.2/dns-query
-    - https://194.242.2.3/dns-query
+    - https://doh.apad.pro/dns-query
   nameserver-policy:
     geosite:private,cn,geolocation-cn:
       - https://dns.alidns.com/dns-query
       - https://doh.pub/dns-query
       - https://doh.360.cn/dns-query
-      - https://116.169.2.207/dns-query
     geosite:google,youtube,telegram,gfw,microsoft,openai,tiktok,github,geolocation-!cn:
-      - https://1.1.1.1/dns-query
-      - https://1.0.0.1/dns-query
-      - https://208.67.222.222/dns-query
-      - https://208.67.220.220/dns-query
-      - https://194.242.2.2/dns-query
-      - https://194.242.2.3/dns-query
+      - https://doh.apad.pro/dns-query
     geosite:googlefcm:
       - https://223.5.5.5/dns-query#h3=true
       - https://1.12.12.12/dns-query
@@ -119,7 +100,7 @@ dns:
       - "[2402:4e00::]"
 
 proxy-groups:
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -139,7 +120,7 @@ proxy-groups:
       - 🚑故障转移
       - DIRECT
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -164,7 +145,7 @@ proxy-groups:
       - 🇮🇳印度AUTO
       - 🇷🇺俄罗斯AUTO
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/categoryglobe.png
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -175,7 +156,7 @@ proxy-groups:
     include-all: true
     filter: (?i)0.[0-9]+(?:×|✖|x|X|✕|⨉)|0.[0-9]+倍率|倍率:0.[0-9]+|0(?:×|✖|x|X|✕|⨉)
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -187,7 +168,7 @@ proxy-groups:
     filter: (?i)倍率|倍|[0-9]+(?:×|✖|x|X|✕|⨉)
     exclude-filter: (?i)倍率:\s*1(?!\.\d+)|(0.[0-9]+(?:×|✖|x|X|✕|⨉))|(0.[0-9]+倍率)|(倍率:0.[0-9]+)|1(?:×|✖|x|X|✕|⨉)|0(?:×|✖|x|X|✕|⨉)
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/fallback.png
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -195,11 +176,11 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🚄延迟选优
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -207,11 +188,23 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)0.[0-9]+(?:×|✖|x|X|✕|⨉)|0.[0-9]+倍率|倍率:0.[0-9]+|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群
+    exclude-filter: (?i)0.[0-9]+(?:×|✖|x|X|✕|⨉)|0.[0-9]+倍率|倍率:0.[0-9]+|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|PL-s7|cf
     tolerance: 50
     name: 🟡1倍率选择
     icon: https://fastly.jsdelivr.net/gh/shindgewongxj/WHATSINStash@master/icon/urltest.png
-  - interval: 300
+  - interval: 180
+    timeout: 5000
+    lazy: false
+    hidden: false
+    url: https://www.gstatic.com/generate_204
+    max-failed-times: 3
+    type: url-test
+    include-all: true
+    exclude-filter: PL-s7|cf|GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|hax|goflybit
+    tolerance: 50
+    name: 🔗链式代理
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -220,9 +213,9 @@ proxy-groups:
     type: select
     name: 📢官网订阅消息
     include-all: true
-    filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     icon: https://files.oaiusercontent.com/file-uN5M9SJ9NTWCZ8obRfaogvyq?se=2024-10-15T06%3A41%3A46Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D41e8c60d-c78f-4b1c-a498-7d6f1beb61a9.webp&sig=97KmnzUPmlSiUo0L1e6FauwSKJyuofl%2BHc6XPtA%2BqWA%3D
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -238,7 +231,7 @@ proxy-groups:
       - 🇸🇬新加坡(散列)
       - 🇸🇬新加坡(轮询)
     icon: https://www.clashverge.dev/assets/icons/balance.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -247,10 +240,10 @@ proxy-groups:
     type: load-balance
     strategy: consistent-hashing
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     name: ⚖️All负载均衡(散列)
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/merry_go.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -259,10 +252,10 @@ proxy-groups:
     type: load-balance
     strategy: round-robin
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     name: ⚖️All负载均衡(轮询)
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/balance.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -272,7 +265,7 @@ proxy-groups:
     type: fallback
     include-all: true
     icon: https://www.clashverge.dev/assets/icons/ambulance.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -283,7 +276,7 @@ proxy-groups:
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -294,7 +287,7 @@ proxy-groups:
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -305,7 +298,7 @@ proxy-groups:
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -316,7 +309,7 @@ proxy-groups:
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -327,7 +320,7 @@ proxy-groups:
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/telegram.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -335,12 +328,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|TG群|邀请|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong|goflybit
     tolerance: 50
     name: 🤖ChatGPT
     expected-status: "200"
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: false
@@ -348,12 +341,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|TG群|邀请|群组|HK|🇭🇰|官网|剩余|🇨🇳|香港|HongKong|goflybit
     tolerance: 50
     name: 🎵TikTok
     expected-status: "200"
     icon: https://www.clashverge.dev/assets/icons/tiktok.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -364,7 +357,7 @@ proxy-groups:
     proxies:
       - 🖥️节点选择
     icon: https://www.clashverge.dev/assets/icons/netflix.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -375,7 +368,7 @@ proxy-groups:
     proxies:
       - 🖥️节点选择
     icon: https://www.clashverge.dev/assets/icons/netflix.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -386,7 +379,18 @@ proxy-groups:
     proxies:
       - 🖥️节点选择
     icon: https://www.clashverge.dev/assets/icons/youtube.svg
-  - interval: 300
+  - interval: 180
+    timeout: 5000
+    lazy: false
+    hidden: true
+    url: https://www.gstatic.com/generate_204
+    max-failed-times: 3
+    name: ☁️微软服务
+    type: select
+    proxies:
+      - 🖥️节点选择
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/microsoft.svg
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -397,7 +401,7 @@ proxy-groups:
     proxies:
       - 🖥️节点选择
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -405,12 +409,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 👑专线(IEPL)AUTO
     filter: (?i)专线|IEPL|👑|专转
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -419,11 +423,11 @@ proxy-groups:
     type: load-balance
     strategy: consistent-hashing
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     name: 👑专线(IEPL)(散列)
     filter: (?i)专线|IEPL|👑|专转
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -432,11 +436,11 @@ proxy-groups:
     type: load-balance
     strategy: round-robin
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     name: 👑专线(IEPL)(轮询)
     filter: (?i)专线|IEPL|👑|专转
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -444,12 +448,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇭🇰香港AUTO
     filter: (?i)香港|Hong Kong|🇭🇰
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -458,11 +462,11 @@ proxy-groups:
     type: load-balance
     strategy: consistent-hashing
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     name: 🇭🇰香港(散列)
     filter: (?i)香港|Hong Kong|🇭🇰
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -471,11 +475,11 @@ proxy-groups:
     type: load-balance
     strategy: round-robin
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     name: 🇭🇰香港(轮询)
     filter: (?i)香港|Hong Kong|🇭🇰
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -483,12 +487,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇸🇬新加坡AUTO
     filter: (?i)新加坡|Singapore|🇸🇬
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -497,11 +501,11 @@ proxy-groups:
     type: load-balance
     strategy: consistent-hashing
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     name: 🇸🇬新加坡(散列)
     filter: (?i)新加坡|Singapore|🇸🇬
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -510,11 +514,11 @@ proxy-groups:
     type: load-balance
     strategy: round-robin
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     name: 🇸🇬新加坡(轮询)
     filter: (?i)新加坡|Singapore|🇸🇬
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -522,12 +526,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇷🇺俄罗斯AUTO
     filter: (?i)俄罗斯|🇷🇺
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -535,12 +539,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇧🇷巴西AUTO
     filter: (?i)巴西|🇧🇷
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -548,12 +552,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇨🇭瑞士AUTO
     filter: (?i)瑞士|🇨🇭
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -561,12 +565,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇦🇺澳大利亚AUTO
     filter: (?i)澳大利亚|🇦🇺
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -574,12 +578,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇨🇦加拿大AUTO
     filter: (?i)加拿大|🇨🇦
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -587,12 +591,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇩🇪德国AUTO
     filter: (?i)德国|🇩🇪|Germany
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -600,12 +604,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇬🇧英国AUTO
     filter: (?i)英国|🇬🇧
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -613,12 +617,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇮🇳印度AUTO
     filter: (?i)印度|🇮🇳
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -626,12 +630,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇯🇵日本AUTO
     filter: (?i)日本|Japan|🇯🇵
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/jp.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -639,12 +643,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇺🇸美国AUTO
     filter: (?i)美国|🇺🇸
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -652,12 +656,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇹🇼台湾AUTO
     filter: (?i)台湾|🇹🇼
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -665,12 +669,12 @@ proxy-groups:
     max-failed-times: 3
     type: url-test
     include-all: true
-    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请
+    exclude-filter: (?i)GB|Traffic|Expire|Premium|频道|订阅|ISP|流量|到期|重置|官网|TG群|邀请|goflybit
     tolerance: 50
     name: 🇰🇷韩国AUTO
     filter: (?i)韩国|🇰🇷|Korea
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/um.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -681,7 +685,7 @@ proxy-groups:
     proxies:
       - REJECT
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/bug.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -692,7 +696,7 @@ proxy-groups:
     proxies:
       - DIRECT
     icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg
-  - interval: 300
+  - interval: 180
     timeout: 5000
     lazy: false
     hidden: true
@@ -719,6 +723,7 @@ rules:
   - RULE-SET,applications,✔️全局直连,no-resolve
   - RULE-SET,private,✔️全局直连,no-resolve
   - RULE-SET,reject,❌广告过滤,no-resolve
+  - RULE-SET,microsoft,☁️微软服务,no-resolve
   - RULE-SET,icloud,✔️全局直连,no-resolve
   - RULE-SET,apple-classical,🍎苹果服务,no-resolve
   - RULE-SET,apple-domain,🍎苹果服务,no-resolve
